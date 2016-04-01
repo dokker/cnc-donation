@@ -1,0 +1,10 @@
+{
+    "require": {
+        "bigfish/paymentgateway": "dev-master"
+    },
+    "autoload": {
+	    "psr-4": {
+	    	"cncDonation\\": "src"
+	    }
+    }
+}

@@ -1,0 +1,63 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "e1e35015f3177480882a7fbab87fad57",
+    "content-hash": "169ca79e0172c84bf02560812e18d2dd",
+    "packages": [
+        {
+            "name": "bigfish/paymentgateway",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bigfish-hu/payment-gateway-php-sdk.git",
+                "reference": "d02fcc63006706dfe70b82d289d396690a21400e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bigfish-hu/payment-gateway-php-sdk/zipball/d02fcc63006706dfe70b82d289d396690a21400e",
+                "reference": "d02fcc63006706dfe70b82d289d396690a21400e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "BigFish\\": "src/BigFish"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "BIG FISH",
+                    "email": "cafe@bigfish.hu"
+                }
+            ],
+            "description": "BIG FISH Payment Gateway - PHP SDK",
+            "homepage": "https://www.paymentgateway.hu/",
+            "keywords": [
+                "ecommerce",
+                "payment",
+                "webshop"
+            ],
+            "time": "2016-03-17 08:57:24"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "bigfish/paymentgateway": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}
