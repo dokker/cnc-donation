@@ -8,6 +8,7 @@ class Component {
 	private $api_key;
 	private $language;
 	private $db_table = 'cnc_donation';
+	private $providers = ['cib', 'paypal'];
 
 	function __construct()
 	{
@@ -44,7 +45,8 @@ class Component {
 				`ldate` DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL,
 				`type` CHAR (30) NOT NULL,
 				`status` CHAR (30) NOT NULL,
-				`amount` INT,
+				`amount` INT(11) NOT NULL,
+				`provider` CHAR (30),
 				UNIQUE KEY id (id)
 				) $charset_collate;";
 
@@ -80,7 +82,7 @@ class Component {
 	 * @param  int $amount  donation amount
 	 * @return object          PMGW request
 	 */
-	private function startSP($amount)
+	private function startSP($amount, $provider = 'CIB')
 	{
 		try {
 			/**
@@ -89,7 +91,7 @@ class Component {
 			 */
 			$request = new \BigFish\PaymentGateway\Request\Init();
 
-			$request->setProviderName("CIB") // A felhasználó által választott fizetési mód
+			$request->setProviderName($provider) // A felhasználó által választott fizetési mód
 				->setResponseUrl($this->responseURL) // Visszatérési URL
 				->setAmount($amount) // Összeg
 				->setCurrency("HUF") // Valutanem
@@ -106,7 +108,7 @@ class Component {
 				/**
 				 * Start PMGW transaction
 				 */
-				$this->storeTransaction($response->TransactionId, 'single', $amount);
+				$this->storeTransaction($response->TransactionId, 'single', $amount, $provider);
 				$start_response = \BigFish\PaymentGateway::start(new \BigFish\PaymentGateway\Request\Start($response->TransactionId));
 				return $start_response;
 			}
@@ -123,7 +125,7 @@ class Component {
 	 * @param  int $amount  donation amount
 	 * @return object          PMGW request
 	 */
-	private function startRP($amount)
+	private function startRP($amount, $provider = 'PayPal')
 	{
 		try {
 			/**
@@ -132,7 +134,7 @@ class Component {
 			 */
 			$request = new \BigFish\PaymentGateway\Request\Init();
 
-			$request->setProviderName("PayPal") // A felhasználó által választott fizetési mód
+			$request->setProviderName($provider) // A felhasználó által választott fizetési mód
 				->setResponseUrl($this->responseURL) // Visszatérési URL
 				->setOneClickPayment(true) // One click payment for recurring payment
 				->setAmount($amount) // Összeg
@@ -150,7 +152,7 @@ class Component {
 				/**
 				 * Start PMGW transaction
 				 */
-				$this->storeTransaction($response->TransactionId, 'recurring', $amount);
+				$this->storeTransaction($response->TransactionId, 'recurring', $amount, $provider);
 				$start_response = \BigFish\PaymentGateway::start(new \BigFish\PaymentGateway\Request\Start($response->TransactionId));
 				return $start_response;
 			}
@@ -196,11 +198,11 @@ class Component {
 	 * @param string $transaction_id Referenced transaction ID
 	 * @return int,boolean  Affected number of rows or FALSE
 	 */
-	private function storeTransaction($transaction_id, $type, $amount)
+	private function storeTransaction($transaction_id, $type, $amount, $provider)
 	{
 		return $this->db->query( 
-			$this->db->prepare("INSERT INTO {$this->db_table} (`id`, `order_id`, `transaction_id`, `tdate`, `type`, `status`, `amount`) VALUES ( NULL, %s, %s, %s, %s, %s, %d )",
-			$this->orderID, $transaction_id, current_time('mysql', 1), $type, 'pending', $amount) 
+			$this->db->prepare("INSERT INTO {$this->db_table} (`id`, `order_id`, `transaction_id`, `tdate`, `type`, `status`, `amount`, `provider`) VALUES ( NULL, %s, %s, %s, %s, %s, %d, %s )",
+			$this->orderID, $transaction_id, current_time('mysql', 1), $type, 'pending', $amount, $provider) 
 		);
 	}
 
@@ -238,6 +240,9 @@ class Component {
 		echo '<label for="donation-method">' . __('Donation regularity', 'cnc-donation') . ':</label>';
 		echo '<div class="radio-wrap"><input type="radio" name="donation-method" value="1" />' . __('Monthly, regular', 'cnc-donation') . '</div>';
 		echo '<div class="radio-wrap"><input type="radio" name="donation-method" value="0" checked="checked" />' . __('Single', 'cnc-donation') . '</div>';
+		echo '<label for="provider">' . __('Provider', 'cnc-donation') . ':</label>';
+		echo '<div class="radio-wrap"><input type="radio" name="provider" value="CIB" /><span class="provider-icon">' . __('CIB', 'cnc-donation') . '</span></div>';
+		echo '<div class="radio-wrap"><input type="radio" name="provider" value="PayPal" checked="checked" /><span class="provider-icon">' . __('PayPal', 'cnc-donation') . '</span></div>';
 		echo '<input class="form-submit" type="submit" name="donation-submitted" value="' . __('Send', 'cnc-donation') . '" />';
 		echo '</div>';
 	}
@@ -262,20 +267,20 @@ class Component {
 			$amount = intval($_POST['given-amount']);
 		}
 		// Amount value validated
-		if ($amount) {
+		if ($amount && $provider = $this->sanitizeProvider($_POST['provider'])) {
 			$this->generateTransactionValues();
 			if (intval($_POST['donation-method']) == 1) {
 				// Recurring payment selected
 				$rp_response = $this->startRP($amount);
 			} else {
 				// Single payment selected
-				$sp_response = $this->startSP($amount);
+				$sp_response = $this->startSP($amount, $provider);
 			}
 		}
 	}
 
 	/**
-	 * Handle shortcode generation
+	 * Handles form shortcode generation
 	 */
 	public function donationFormShortcode()
 	{
@@ -365,5 +370,20 @@ class Component {
 	{
 		$classes[] = 'cnc-donation-page';
 		return $classes;
+	}
+
+	/**
+	 * Validate provider name
+	 * @param  string $provider Provider name
+	 * @return string,boolean           Sanitized provider name or FALSE
+	 */
+	private function sanitizeProvider($provider)
+	{
+		$provider = sanitize_text_field($provider);
+		if (in_array(strtolower($provider), $this->providers)) {
+			return $provider;
+		} else {
+			return false;
+		}
 	}
 }
