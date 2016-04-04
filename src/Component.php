@@ -337,6 +337,19 @@ class Component {
 	}
 
 	/**
+	 * Function for cron_schedules filter to add new schedule
+	 * @param  [type] $schedules [description]
+	 * @return [type]            [description]
+	 */
+	public function cronDefiner($schedules){
+		$schedules['monthly'] = array(
+			'interval'=> 2592000,
+			'display'=>  __('Once Every 30 Days')
+			);
+		return $schedules;
+	}
+
+	/**
 	 * Get successful recurring payment reference IDs
 	 * @return array,boolean Reault list or FALSE
 	 */

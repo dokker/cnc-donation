@@ -56,8 +56,9 @@ register_activation_hook(__FILE__, [$component, 'pluginActivate']);
 // NOTE: Not working. Using unintsall.php instead
 // register_uninstall_hook(__FILE__, ['\cncDonation\Component', 'pluginUninstall']);
 
+add_filter('cron_schedules', [$component, 'cronDefiner']);    
 if (!wp_next_scheduled('cnc_recurring_payment')) {
-	wp_schedule_event(time(), 'daily', 'cnc_recurring_payment');
+	wp_schedule_event(time(), 'monthly', 'cnc_recurring_payment');
 }
 add_action( 'cnc_recurring_payment', [$component, 'recurringPaymentCron'] );
 
