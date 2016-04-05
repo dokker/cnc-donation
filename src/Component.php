@@ -227,7 +227,7 @@ class Component {
 	 */
 	private function renderDonationForm()
 	{
-		echo '<div class="cnc-donation">';
+		echo '<div class="cnc-donation" id="cnc-donation">';
 		// echo '<form class="donation-form" action="' . esc_url( $_SERVER['REQUEST_URI'] ) . '" method="post">';
 		echo '<form class="donation-form" action="' . get_bloginfo( 'url' ) . '/cnc-donation" method="post">';
 		echo '<label for="donation-amount">' . __('Amount of donation', 'cnc-donation') . ':</label>';
@@ -297,6 +297,55 @@ class Component {
 			} else {
 				$this->renderDonationForm();
 			}
+		} 
+	}
+
+	/**
+	 * Handles results shortcode generation
+	 */
+	public function donationResultsShortcode()
+	{
+		if (!isset($_POST['donation-submitted'])) {
+			if (isset($_GET['TransactionId']) && !empty($_GET['TransactionId'])) {
+				$transaction_id = sanitize_text_field($_GET['TransactionId']);
+				if($this->checkPaymentResult($transaction_id)) {
+					// Successful transaction
+					$type = $this->getTransactionType($transaction_id);
+					switch ($type) {
+						case 'recurring':
+							$message = '<strong>Sikeres tranzakció! Köszönjük támogatását!</strong>
+								<p>Amennyiben módosítani szeretne a rendszeres havi fizetésén, kövesse a következő lépéseket 
+								(<a href="https://www.paypal.com/selfhelp/article/FAQ1067">Angol nyelvű útmutató.</a>):</p>
+								<ol>
+									<li> Log in to your PayPal account.</li>
+									<li> Click <b>Profile</b> near the top of the page.</li>
+									<li> Click <b>My money</b>.</li>
+									<li> Click <b>Update </b>in the <strong>My preapproved payments </strong>section.</li>
+									<li> Click <b>Cancel</b> or <b>Cancel automatic billing</b> and follow the instructions.</li>
+								</ol>
+								<p>Amennyiben nem rendelkezik paypal fiókkal:</p>
+								<ol>
+									<li> Go to the PayPal website.</li>
+									<li> Click <b>Contact Us</b> at the bottom of any page.</li>
+									<li> Click <b>Call Us</b>, then click <b>Continue</b> for our Customer Service phone number.</li>
+								</ol>
+								';
+						break;
+						case 'single':
+							$message = '<strong>Sikeres tranzakció! Köszönjük támogatását!</strong>';
+						break;
+					}
+					$this->statusMessage($message, 'success');
+				} else {
+					// Transaction failed
+					$message = '<strong>Sikertelen fizetés, kérjük próbálja meg újra!</strong>
+						<p>Kérjük ellenőrizze az alábbiakat:</p>
+						<ul><li>van elegendő pénz a kártyáján</li>
+						<li>jól adott meg minden kártya adatot</li>
+						<li>túllépte a fizetésre szánt időkeretet</li></ul>';
+					$this->statusMessage($message, 'error');
+				}
+			} 
 		} 
 	}
 
@@ -386,4 +435,30 @@ class Component {
 			return false;
 		}
 	}
+
+	/**
+	 * Print formatted status message markup
+	 * @param  string $message Message text (HTML)
+	 * @param  string $type    Type of status message
+	 */
+	private function statusMessage($message, $type)
+	{
+		echo '<div class="status-wrap status-' . $type . '">
+			<div class="status-message">' . $message . '
+			<p><a class="new-transaction" href="
+			' . strtok($_SERVER["REQUEST_URI"],'?') . '#cnc-donation">Új tranzakció kezdeményezése</a></p>
+			</div></div>';
+	}
+
+	/**
+	 * Get transaction type by reference ID
+	 * @param  string $transaction_id Reference ID
+	 * @return string                 Type result or NULL
+	 */
+	private function getTransactionType($transaction_id)
+	{
+		return $this->db->get_var("SELECT `type` FROM {$this->db_table} 
+			WHERE `transaction_id` = '{$transaction_id}'");
+	}
+
 }
