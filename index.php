@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: PMGW donation
-Plugin URI: https://github.com/dokker/cac-donation
+Plugin URI: https://github.com/dokker/cnc-donation
 Description: Handle donation with PMGW
 Version: 1.0
 Author: docker
