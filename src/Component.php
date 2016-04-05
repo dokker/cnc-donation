@@ -238,11 +238,11 @@ class Component {
 		echo '<div class="given-amount-wrapper"><label for="given-amount">' . __('Given amount of donation', 'cnc-donation') . ':</label>';
 		echo '<input type="text" name="given-amount" /> Ft.</div>';
 		echo '<label for="donation-method">' . __('Donation regularity', 'cnc-donation') . ':</label>';
-		echo '<div class="radio-wrap"><input type="radio" name="donation-method" value="1" />' . __('Monthly, regular', 'cnc-donation') . '</div>';
-		echo '<div class="radio-wrap"><input type="radio" name="donation-method" value="0" checked="checked" />' . __('Single', 'cnc-donation') . '</div>';
+		echo '<div class="radio-wrap"><input type="radio" name="donation-method" class="donation-method recurring" value="1" />' . __('Monthly, regular', 'cnc-donation') . '</div>';
+		echo '<div class="radio-wrap"><input type="radio" name="donation-method" class="donation-method single" value="0" checked="checked" />' . __('Single', 'cnc-donation') . '</div>';
 		echo '<label for="provider">' . __('Provider', 'cnc-donation') . ':</label>';
-		echo '<div class="radio-wrap"><input type="radio" name="provider" value="CIB" /><span class="provider-icon">' . __('CIB', 'cnc-donation') . '</span></div>';
-		echo '<div class="radio-wrap"><input type="radio" name="provider" value="PayPal" checked="checked" /><span class="provider-icon">' . __('PayPal', 'cnc-donation') . '</span></div>';
+		echo '<div class="radio-wrap"><input type="radio" class="provider-field" name="provider" value="CIB" /><span class="provider-icon provider-cib">' . __('CIB', 'cnc-donation') . '</span></div>';
+		echo '<div class="radio-wrap"><input type="radio" class="provider-field" name="provider" value="PayPal" checked="checked" /><span class="provider-icon provider-paypal">' . __('PayPal', 'cnc-donation') . '</span></div>';
 		echo '<input class="form-submit" type="submit" name="donation-submitted" value="' . __('Send', 'cnc-donation') . '" />';
 		echo '</div>';
 	}
