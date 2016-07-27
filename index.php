@@ -40,7 +40,11 @@ if (is_file($vendorAutoload)) {
 }
 
 // load translations
-load_plugin_textdomain( 'cnc-donation', false, 'cnc-donation/languages' );
+function __cnc_donation_load_plugin()
+{
+	load_plugin_textdomain( 'cnc-donation', false, 'cnc-donation/languages' );
+}
+add_action('plugins_loaded', '__cnc_donation_load_plugin');
 
 /**
  * Instantiate plugin class
