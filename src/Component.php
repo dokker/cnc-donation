@@ -227,24 +227,26 @@ class Component {
 	 */
 	private function renderDonationForm()
 	{
-		echo '<div class="cnc-donation" id="cnc-donation">';
-		// echo '<form class="donation-form" action="' . esc_url( $_SERVER['REQUEST_URI'] ) . '" method="post">';
-		echo '<form class="donation-form" action="' . get_bloginfo( 'url' ) . '/cnc-donation" method="post">';
-		echo '<label for="donation-amount">' . __('Amount of donation', 'cnc-donation') . ':</label>';
-		echo '<div class="radio-wrap"><input type="radio" name="donation-amount" value="5000" class="donation-amount" checked="checked" /> 5.000 Ft.</div>';
-		echo '<div class="radio-wrap"><input type="radio" name="donation-amount" value="10000" class="donation-amount" /> 10.000 Ft.</div>';
-		echo '<div class="radio-wrap"><input type="radio" name="donation-amount" value="20000" class="donation-amount" /> 20.000 Ft.</div>';
-		echo '<div class="radio-wrap"><input type="radio" name="donation-amount" value="custom" class="donation-amount" /> ' . __('Given amount', 'cnc-donation') . '</div>';
-		echo '<div class="given-amount-wrapper"><label for="given-amount">' . __('Given amount of donation', 'cnc-donation') . ':</label>';
-		echo '<input type="text" name="given-amount" /> Ft.</div>';
-		echo '<label for="donation-method">' . __('Donation regularity', 'cnc-donation') . ':</label>';
-		echo '<div class="radio-wrap"><input type="radio" name="donation-method" class="donation-method recurring" value="1" />' . __('Monthly, regular', 'cnc-donation') . '</div>';
-		echo '<div class="radio-wrap"><input type="radio" name="donation-method" class="donation-method single" value="0" checked="checked" />' . __('Single', 'cnc-donation') . '</div>';
-		echo '<label for="provider">' . __('Provider', 'cnc-donation') . ':</label>';
-		echo '<div class="radio-wrap"><input type="radio" class="provider-field" name="provider" value="CIB" /><span class="provider-icon provider-cib">' . __('CIB', 'cnc-donation') . '</span></div>';
-		echo '<div class="radio-wrap"><input type="radio" class="provider-field" name="provider" value="PayPal" checked="checked" /><span class="provider-icon provider-paypal">' . __('PayPal', 'cnc-donation') . '</span></div>';
-		echo '<input class="form-submit" type="submit" name="donation-submitted" value="' . __('Send', 'cnc-donation') . '" />';
-		echo '</div>';
+		$form_html = '';
+		$form_html .= '<div class="cnc-donation" id="cnc-donation">';
+		// $form_html .= '<form class="donation-form" action="' . esc_url( $_SERVER['REQUEST_URI'] ) . '" method="post">';
+		$form_html .= '<form class="donation-form" action="' . get_bloginfo( 'url' ) . '/cnc-donation" method="post">';
+		$form_html .= '<label for="donation-amount">' . __('Amount', 'cnc-donation') . ':</label>';
+		$form_html .= '<div class="radio-wrap"><input type="radio" name="donation-amount" value="5000" class="donation-amount" checked="checked" /> 5.000 Ft.</div>';
+		$form_html .= '<div class="radio-wrap"><input type="radio" name="donation-amount" value="10000" class="donation-amount" /> 10.000 Ft.</div>';
+		$form_html .= '<div class="radio-wrap"><input type="radio" name="donation-amount" value="20000" class="donation-amount" /> 20.000 Ft.</div>';
+		$form_html .= '<div class="radio-wrap"><input type="radio" name="donation-amount" value="custom" class="donation-amount" /> ' . __('Given amount', 'cnc-donation') . '</div>';
+		$form_html .= '<div class="given-amount-wrapper"><label for="given-amount">' . __('Given amount of donation', 'cnc-donation') . ':</label>';
+		$form_html .= '<input type="text" name="given-amount" /> Ft.</div>';
+		$form_html .= '<label for="donation-method">' . __('Donation frequency', 'cnc-donation') . ':</label>';
+		$form_html .= '<div class="radio-wrap"><input type="radio" name="donation-method" class="donation-method recurring" value="1" />' . __('Regular monthly donation', 'cnc-donation') . '</div>';
+		$form_html .= '<div class="radio-wrap"><input type="radio" name="donation-method" class="donation-method single" value="0" checked="checked" />' . __('One-off donation', 'cnc-donation') . '</div>';
+		$form_html .= '<label for="provider">' . __('Payment method', 'cnc-donation') . ':</label>';
+		$form_html .= '<div class="radio-wrap"><input type="radio" class="provider-field" name="provider" value="CIB" /><span class="provider-icon provider-cib">' . __('CIB', 'cnc-donation') . '</span></div>';
+		$form_html .= '<div class="radio-wrap"><input type="radio" class="provider-field" name="provider" value="PayPal" checked="checked" /><span class="provider-icon provider-paypal">' . __('PayPal', 'cnc-donation') . '</span></div>';
+		$form_html .= '<input class="form-submit" type="submit" name="donation-submitted" value="' . __('Send', 'cnc-donation') . '" />';
+		$form_html .= '</form></div>';
+		return $form_html;
 	}
 
 	private function generateTransactionValues()
