@@ -297,7 +297,7 @@ class Component {
 					$this->updateTransactionStatus($transaction_id, 'failed');
 				}
 			} else {
-				$this->renderDonationForm();
+				return $this->renderDonationForm();
 			}
 		} 
 	}
@@ -337,7 +337,7 @@ class Component {
 							$message = '<strong>Sikeres tranzakció! Köszönjük támogatását!</strong>';
 						break;
 					}
-					$this->statusMessage($message, 'success');
+					return $this->statusMessage($message, 'success');
 				} else {
 					// Transaction failed
 					$message = '<strong>Sikertelen fizetés, kérjük próbálja meg újra!</strong>
@@ -345,7 +345,7 @@ class Component {
 						<ul><li>van elegendő pénz a kártyáján</li>
 						<li>jól adott meg minden kártya adatot</li>
 						<li>túllépte a fizetésre szánt időkeretet</li></ul>';
-					$this->statusMessage($message, 'error');
+					return $this->statusMessage($message, 'error');
 				}
 			} 
 		} 
@@ -445,7 +445,7 @@ class Component {
 	 */
 	private function statusMessage($message, $type)
 	{
-		echo '<div class="status-wrap status-' . $type . '">
+		return '<div class="status-wrap status-' . $type . '">
 			<div class="status-message">' . $message . '
 			<p><a class="new-transaction" href="
 			' . strtok($_SERVER["REQUEST_URI"],'?') . '#cnc-donation">Új tranzakció kezdeményezése</a></p>
