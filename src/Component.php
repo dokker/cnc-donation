@@ -7,6 +7,7 @@ class Component {
 	private $store_name;
 	private $api_key;
 	private $language;
+	private $test;
 	private $db_table = 'cnc_donation';
 	private $providers = ['cib', 'paypal'];
 
@@ -21,6 +22,7 @@ class Component {
 		$this->seed = $cac_donation_config['seed'];
 		$this->store_name = $cac_donation_config['store_name'];
 		$this->api_key = $cac_donation_config['api_key'];
+		$this->test = $cac_donation_config['test'];
 		// Check for WPML language code
 		if (defined('ICL_LANGUAGE_CODE')) {
 			$this->language = ICL_LANGUAGE_CODE;
@@ -73,7 +75,7 @@ class Component {
 	{
 		$config->storeName = $this->store_name;
 		$config->apiKey = $this->api_key;
-		$config->testMode = true;
+		$config->testMode = $this->test;
 		return $config;
 	}
 
