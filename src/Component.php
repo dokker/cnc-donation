@@ -243,26 +243,8 @@ class Component {
 	 */
 	private function renderDonationForm()
 	{
-		$form_html = '';
-		$form_html .= '<div class="cnc-donation" id="cnc-donation">';
-		// $form_html .= '<form class="donation-form" action="' . esc_url( $_SERVER['REQUEST_URI'] ) . '" method="post">';
-		$form_html .= '<form class="donation-form" action="' . get_bloginfo( 'url' ) . '/cnc-donation" method="post">';
-		$form_html .= '<label for="donation-amount">' . __('Amount', 'cnc-donation') . ':</label>';
-		$form_html .= '<div class="radio-wrap"><input type="radio" name="donation-amount" value="5000" class="donation-amount" checked="checked" /> 5.000 Ft.</div>';
-		$form_html .= '<div class="radio-wrap"><input type="radio" name="donation-amount" value="10000" class="donation-amount" /> 10.000 Ft.</div>';
-		$form_html .= '<div class="radio-wrap"><input type="radio" name="donation-amount" value="20000" class="donation-amount" /> 20.000 Ft.</div>';
-		$form_html .= '<div class="radio-wrap"><input type="radio" name="donation-amount" value="custom" class="donation-amount" /> ' . __('Given amount', 'cnc-donation') . '</div>';
-		$form_html .= '<div class="given-amount-wrapper"><label for="given-amount">' . __('Given amount of donation', 'cnc-donation') . ':</label>';
-		$form_html .= '<input type="text" name="given-amount" /> Ft.</div>';
-		$form_html .= '<label for="donation-method">' . __('Donation frequency', 'cnc-donation') . ':</label>';
-		$form_html .= '<div class="radio-wrap"><input type="radio" name="donation-method" class="donation-method recurring" value="1" />' . __('Regular monthly donation', 'cnc-donation') . '</div>';
-		$form_html .= '<div class="radio-wrap"><input type="radio" name="donation-method" class="donation-method single" value="0" checked="checked" />' . __('One-off donation', 'cnc-donation') . '</div>';
-		$form_html .= '<label for="provider">' . __('Payment method', 'cnc-donation') . ':</label>';
-		$form_html .= '<div class="radio-wrap"><input type="radio" class="provider-field" name="provider" value="CIB" /><span class="provider-icon provider-cib">' . __('CIB', 'cnc-donation') . '</span></div>';
-		$form_html .= '<div class="radio-wrap"><input type="radio" class="provider-field" name="provider" value="PayPal" checked="checked" /><span class="provider-icon provider-paypal">' . __('PayPal', 'cnc-donation') . '</span></div>';
-		$form_html .= '<input class="form-submit" type="submit" name="donation-submitted" value="' . __('Send', 'cnc-donation') . '" />';
-		$form_html .= '</form></div>';
-		return $form_html;
+		$view = new View();
+		return $view->render('form-donation');
 	}
 
 	private function generateTransactionValues()
@@ -325,42 +307,23 @@ class Component {
 	{
 		if (!isset($_POST['donation-submitted'])) {
 			if (isset($_GET['TransactionId']) && !empty($_GET['TransactionId'])) {
+				$view = new View();
 				$transaction_id = sanitize_text_field($_GET['TransactionId']);
 				if($this->checkPaymentResult($transaction_id)) {
 					// Successful transaction
 					$type = $this->getTransactionType($transaction_id);
 					switch ($type) {
 						case 'recurring':
-							$message = '<strong>Sikeres tranzakció! Köszönjük támogatását!</strong>
-								<p>Amennyiben módosítani szeretne a rendszeres havi fizetésén, kövesse a következő lépéseket 
-								(<a href="https://www.paypal.com/selfhelp/article/FAQ1067">Angol nyelvű útmutató.</a>):</p>
-								<ol>
-									<li> Log in to your PayPal account.</li>
-									<li> Click <b>Profile</b> near the top of the page.</li>
-									<li> Click <b>My money</b>.</li>
-									<li> Click <b>Update </b>in the <strong>My preapproved payments </strong>section.</li>
-									<li> Click <b>Cancel</b> or <b>Cancel automatic billing</b> and follow the instructions.</li>
-								</ol>
-								<p>Amennyiben nem rendelkezik paypal fiókkal:</p>
-								<ol>
-									<li> Go to the PayPal website.</li>
-									<li> Click <b>Contact Us</b> at the bottom of any page.</li>
-									<li> Click <b>Call Us</b>, then click <b>Continue</b> for our Customer Service phone number.</li>
-								</ol>
-								';
+							$message = $view->render('transaction-success-recurring');
 						break;
 						case 'single':
-							$message = '<strong>Sikeres tranzakció! Köszönjük támogatását!</strong>';
+							$message = $view->render('transaction-success-single');
 						break;
 					}
 					return $this->statusMessage($message, 'success');
 				} else {
 					// Transaction failed
-					$message = '<strong>Sikertelen fizetés, kérjük próbálja meg újra!</strong>
-						<p>Kérjük ellenőrizze az alábbiakat:</p>
-						<ul><li>van elegendő pénz a kártyáján</li>
-						<li>jól adott meg minden kártya adatot</li>
-						<li>túllépte a fizetésre szánt időkeretet</li></ul>';
+					$message = $view->render('transaction-error');
 					return $this->statusMessage($message, 'error');
 				}
 			} 
