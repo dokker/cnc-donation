@@ -136,13 +136,26 @@ class Component {
 			 */
 			$request = new \BigFish\PaymentGateway\Request\Init();
 
-			$request->setProviderName($provider) // A felhasználó által választott fizetési mód
-				->setResponseUrl($this->responseURL) // Visszatérési URL
+			// Set extra Reference for recurring
+			$extra = [
+				'REFERENCE' => [
+					'BILLINGFREQUENCY' => 1,
+					'BILLINGPERIOD' => 'Month',
+					'INITAMT' => $amount,
+					// 30 days after in this format: 2016-08-26T08:29:56Z
+					'PROFILESTARTDATE' => gmdate('Y-m-d\TH:i:s\Z', time() + (30 * 24 * 60 * 60)),
+					'DESC' => 'Recurring donation for Transparency International Hungary',
+				],
+			];
+
+			$request->setProviderName($provider) // Payment method
+				->setResponseUrl($this->responseURL) // Response URL
 				->setOneClickPayment(true) // One click payment for recurring payment
-				->setAmount($amount) // Összeg
-				->setCurrency("HUF") // Valutanem
-				->setOrderId($this->orderID) // Megrendelés azonosító
-				->setLanguage($this->language); // Nyelv
+				->setAmount($amount) // Amount
+				->setCurrency("HUF") // Currenvy
+				->setOrderId($this->orderID) // Order ID
+				->setLanguage($this->language) // Language
+				->setExtra($extra);
 
 			/**
 			 * Init PMGW transaction
@@ -167,6 +180,7 @@ class Component {
 	}
 
 	/**
+	 * NO LONGER REQUIRED!
 	 * Init and start recurring payment
 	 * 
 	 * @param int $amount Amount of donation
@@ -381,6 +395,9 @@ class Component {
 		}
 	}
 
+	/**
+	 * NO LONGER REQUIRED!
+	 */
 	public function recurringPaymentCron()
 	{
 		$transactions = $this->getRecurringList();
@@ -395,6 +412,7 @@ class Component {
 	}
 
 	/**
+	 * NO LONGER REQUIRED!
 	 * Function for cron_schedules filter to add new schedule
 	 * @param  [type] $schedules [description]
 	 * @return [type]            [description]
@@ -408,6 +426,7 @@ class Component {
 	}
 
 	/**
+	 * NO LONGER REQUIRED!
 	 * Get successful recurring payment reference IDs
 	 * @return array,boolean Reault list or FALSE
 	 */
