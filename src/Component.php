@@ -447,4 +447,9 @@ class Component {
 			WHERE `transaction_id` = '{$transaction_id}'");
 	}
 
+	public function donationPackagesShortcode()
+	{
+		$view = new View();
+		return $view->render('sc-payment-packages');
+	}
 }
