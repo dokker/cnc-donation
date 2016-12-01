@@ -14,6 +14,8 @@ class Component {
 	function __construct()
 	{
 		global $wpdb;
+		$this->plugin_path = plugin_dir_path(dirname(__FILE__));
+		$this->plugin_url = plugin_dir_url(dirname(__FILE__));
 		$this->db = $wpdb;
 		$this->db_table = $this->db->prefix . $this->db_table;
 
@@ -29,6 +31,22 @@ class Component {
 		} else {
 			$this->language = substr(get_bloginfo ( 'language' ), 0, 2);
 		}
+
+		add_action('wp_enqueue_scripts', [$this, 'registerScripts']);
+	}
+
+	/**
+	 * Callback for register necessary scripts
+	 */
+	public function registerScripts()
+	{
+		wp_enqueue_style('cnc-donation-main', $this->plugin_url . '/assets/css/main.css');
+		wp_register_script('cnc-donation-main', $this->plugin_url . '/assets/js/main.js', array('jquery'), '1', true);
+		// Prepare script for use AJAX
+		wp_localize_script( 'cnc-donation-main', 'cnc_donation_obj', array(
+			'ajax_url' => admin_url( 'admin-ajax.php' ),
+		    'nonce'    => wp_create_nonce('cncdntn_nonce'),
+	    ) );
 	}
 
 	/**
@@ -449,6 +467,7 @@ class Component {
 
 	public function donationPackagesShortcode()
 	{
+		wp_enqueue_script('cnc-donation-main');
 		$view = new View();
 		return $view->render('sc-payment-packages');
 	}
