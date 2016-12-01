@@ -1,3 +1,7 @@
+.payment-packages {
+	margin-bottom: 30px;
+}
+
 .payment-packages .package {
 	height: 460px;
 	position: relative;
@@ -28,7 +32,11 @@
 .payment-packages .title {
 	font-size: 32px;
 	line-height: 32px;
-	margin-bottom: 55px;
+	margin: 0 0 55px;
+}
+
+.payment-packages h4.title {
+	font-size: 38px;
 }
 
 .payment-packages .amount {
@@ -56,4 +64,18 @@
 
 .payment-packages a:hover {
 	opacity: .1;
+}
+
+.payment-packages .package-indie {
+	border: 2px solid #0476c7;
+	background: transparent;
+}
+
+.package-indie .amount {
+	padding-left: 140px;
+}
+
+.package-indie .description {
+	color: #000;
+	font-size: 1em;
 }

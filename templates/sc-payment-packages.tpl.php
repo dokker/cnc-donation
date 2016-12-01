@@ -1,5 +1,5 @@
 <div class="payment-packages">
-	<div class="payment-packages-wrap">
+	<div class="payment-packages-wrap row">
 		<div class="package package-1 col-md-4 col-sm-6">
 			<div class="item-wrap">
 				<p class="title"><?php _e('Átláthatóság támogatója', 'cnc-donation'); ?></p>

@@ -465,10 +465,25 @@ class Component {
 			WHERE `transaction_id` = '{$transaction_id}'");
 	}
 
+	/**
+	 * Generate Packages shortcode content
+	 * @return string HTML markup of the shortcode
+	 */
 	public function donationPackagesShortcode()
 	{
 		wp_enqueue_script('cnc-donation-main');
 		$view = new View();
 		return $view->render('sc-payment-packages');
+	}
+
+	/**
+	 * Generate Individual payment shortcode content
+	 * @return string HTML markup of the shortcode
+	 */
+	public function donationIndieShortcode()
+	{
+		wp_enqueue_script('cnc-donation-main');
+		$view = new View();
+		return $view->render('sc-payment-indie');
 	}
 }
