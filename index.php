@@ -43,19 +43,21 @@ if (is_file($vendorAutoload)) {
 function __cnc_donation_load_plugin()
 {
 	load_plugin_textdomain( 'cnc-donation', false, 'cnc-donation/languages' );
+	/**
+	 * Instantiate plugin class
+	 * @var object
+	 */
+	$virtualpage = new \cncDonation\Virtualpage();
+	$component = new \cncDonation\Component();
+	$shortcode = new \cncDonation\Shortcode($component);
+
+	// Handling plugin activation
+	register_activation_hook(__FILE__, [$component, 'pluginActivate']);
+
+	add_filter('body_class', [$component, 'setBodyClass']);
 }
 add_action('plugins_loaded', '__cnc_donation_load_plugin');
 
-/**
- * Instantiate plugin class
- * @var object
- */
-$virtualpage = new \cncDonation\Virtualpage();
-$component = new \cncDonation\Component();
-$shortcode = new \cncDonation\Shortcode($component);
-
-// Handling plugin activation
-register_activation_hook(__FILE__, [$component, 'pluginActivate']);
 // Handling plugin uninstall
 // NOTE: Not working. Using unintsall.php instead
 // register_uninstall_hook(__FILE__, ['\cncDonation\Component', 'pluginUninstall']);
@@ -66,4 +68,3 @@ register_activation_hook(__FILE__, [$component, 'pluginActivate']);
 // }
 // add_action( 'cnc_recurring_payment', [$component, 'recurringPaymentCron'] );
 
-add_filter('body_class', [$component, 'setBodyClass']);
