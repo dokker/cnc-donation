@@ -473,7 +473,21 @@ class Component {
 	{
 		wp_enqueue_script('cnc-donation-main');
 		$view = new View();
-		return $view->render('sc-payment-packages');
+		$html = $view->render('sc-payment-packages');
+
+		$terms = $view->render('terms-' . $this->getCurrentLanguage());
+		$view->assign('terms', $terms);
+
+		$view->assign('package_id', 1);
+		$view->assign('package_name', __('Ally of Transparency', 'cnc-donation'));
+		$html .= $view->render('popup-donation-package');
+		$view->assign('package_id', 2);
+		$view->assign('package_name', __('Champion of Integrity', 'cnc-donation'));
+		$html .= $view->render('popup-donation-package');
+		$view->assign('package_id', 3);
+		$view->assign('package_name', __('Anti-Corruption Superhero', 'cnc-donation'));
+		$html .= $view->render('popup-donation-package');
+		return $html;
 	}
 
 	/**
@@ -486,4 +500,23 @@ class Component {
 		$view = new View();
 		return $view->render('sc-payment-indie');
 	}
+
+	private function getCurrentLanguage()
+	{
+		if ( function_exists('icl_object_id') ) {
+			$languages = icl_get_languages('skip_missing=1');
+			if( !empty( $languages ) ) {
+				foreach( $languages as $language ) {
+					if( !empty( $language['active'] ) ) {
+		                $curr_lang = $language['language_code']; // This will contain current language info.
+		                break;
+		            }
+		        }
+		    }
+		    return $curr_lang;
+		} else {
+			return 'hu';
+		}
+	}
+
 }
