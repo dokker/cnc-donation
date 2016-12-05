@@ -104,12 +104,12 @@
 .custom-control {
     position: relative;
     display: inline-block;
-    padding-left: 1.5rem;
+    padding-left: 47px;
     cursor: pointer;
 }
 
 .custom-checkbox .custom-control-input:checked~.custom-control-indicator {
-    background-image: url(data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' v…M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3E%3C/svg%3E);
+    background-image: url(data:image/svg+xml;charset=utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'><path fill='#fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/></svg>);
 }
 .custom-control-input:checked~.custom-control-indicator {
     color: #fff;
@@ -118,27 +118,41 @@
 .custom-checkbox .custom-control-indicator {
     border-radius: .25rem;
 }
+
+.custom-checkbox {
+	width: 100%;
+	max-width: 440px;
+	margin: 0 auto;
+	display: block;
+}
+
 .custom-control-indicator {
     position: absolute;
     top: .25rem;
-    left: 0;
+    left: 22px;
     display: block;
-    width: 1rem;
-    height: 1rem;
+    width: 17px;
+    height: 17px;
     pointer-events: none;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    background-color: #ddd;
+    background-color: #eee;
     background-repeat: no-repeat;
     background-position: center center;
     -webkit-background-size: 50% 50%;
     background-size: 50% 50%;
+    border: 2px solid #0074d9;
 }
 
 .custom-control-input {
     position: absolute;
     z-index: -1;
     opacity: 0;
+}
+
+.custom-checkbox .custom-control-description {
+	font-weight: normal;
+	font-size: 1.15em;
 }
