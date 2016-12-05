@@ -100,6 +100,17 @@
 	text-align: left;
 }
 
+.donation-popup .has-error .help-block {
+	display: block;
+}
+
+.donation-popup .help-block {
+	display: none;
+}
+
+.form-group-submit {
+	margin-top: 30px;
+}
 
 .custom-control {
     position: relative;
@@ -155,4 +166,9 @@
 .custom-checkbox .custom-control-description {
 	font-weight: normal;
 	font-size: 1.15em;
+}
+
+.custom-control-input:focus~.custom-control-indicator {
+    -webkit-box-shadow: 0 0 0 .075em #fff,0 0 0 .2em #0074d9;
+    box-shadow: 0 0 0 .075em #fff,0 0 0 .2em #0074d9;
 }
