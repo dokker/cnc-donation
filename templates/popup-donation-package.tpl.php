@@ -25,13 +25,14 @@
     </div> -->
     <div class="mc-field-group form-group text-left">
       <label class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input">
+        <input type="checkbox" class="custom-control-input terms-accept">
         <span class="custom-control-indicator"></span>
         <span class="custom-control-description">I accept the terms and conditions</span>
       </label>
+      <div class="help-block"><?php _e('You have to accept the terms and conditions.', 'sage'); ?></div>
     </div>
     <div class="clear form-group-submit">
-      <input type="hidden" name="cnc-package-id">
+      <input type="hidden" name="cnc-package-id" value="<?php echo $package_id; ?>">
       <input type="submit" value="<?php _e('I support Transparency International Hungary!', 'sage'); ?>" name="subscribe" id="mc-embedded-subscribe" class="button btn btn-primary">
     </div>
   </div>
