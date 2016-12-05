@@ -16,13 +16,13 @@
       <input type="email" value="" name="EMAIL" class="required email form-control input-lg" id="mce-EMAIL" placeholder="<?php _e('Email'); ?>">
       <div class="help-block"><?php _e('Missing Email', 'sage'); ?></div>
     </div>
-    <div class="mc-field-group form-group text-left">
+<!--<div class="mc-field-group form-group text-left">
       <label class="custom-control custom-checkbox">
         <input type="checkbox" class="custom-control-input">
         <span class="custom-control-indicator"></span>
         <span class="custom-control-description">I would like to sign up for the Transparency Newsletter</span>
       </label>
-    </div>
+    </div> -->
     <div class="mc-field-group form-group text-left">
       <label class="custom-control custom-checkbox">
         <input type="checkbox" class="custom-control-input">
@@ -35,7 +35,7 @@
       <input type="submit" value="<?php _e('I support Transparency International Hungary!', 'sage'); ?>" name="subscribe" id="mc-embedded-subscribe" class="button btn btn-primary">
     </div>
   </div>
-  <p class="footnote"><?php _e('You can cancel your subscription any time.', 'sage'); ?></p>
+  <!-- <p class="footnote"><?php _e('You can cancel your subscription any time.', 'sage'); ?></p> -->
 </form>
 </div>
 
