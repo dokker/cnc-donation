@@ -35,7 +35,7 @@ class Virtualpage {
 	function change_template( $template ) {
 		if( get_query_var( 'cnc-donation', false ) !== false ) {
 			$component = new \cncDonation\Component();
-			if ($component->processDonationForm()) {
+			if ($component->processPopupDonationForm()) {
 				// Request processed
 				echo "Sikeres adományozás";
 			} else {

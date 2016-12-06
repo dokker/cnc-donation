@@ -7,13 +7,13 @@
     <h3 class="title"><?php echo $package_name; ?></h3>
     <div class="terms"><?php echo $terms; ?></div>
     <div class="mc-field-group form-group">
-      <label class="sr-only" for="mce-MMERGE3"><?php _e('Name', 'sage'); ?> </label>
-      <input type="text" value="" name="MMERGE3" class="form-control input-lg" id="mce-MMERGE3" placeholder="<?php _e('Name'); ?>">
+      <label class="sr-only" for="supporter-name"><?php _e('Name', 'sage'); ?> </label>
+      <input type="text" value="" name="supporter-name" class="form-control input-lg" id="mce-MMERGE3" placeholder="<?php _e('Name'); ?>">
       <div class="help-block"><?php _e('Missing name', 'sage'); ?></div>
     </div>
     <div class="mc-field-group form-group">
-      <label class="sr-only" for="mce-EMAIL"><?php _e('Email', 'sage'); ?> </label>
-      <input type="email" value="" name="EMAIL" class="required email form-control input-lg" id="mce-EMAIL" placeholder="<?php _e('Email'); ?>">
+      <label class="sr-only" for="supporter-email"><?php _e('Email', 'sage'); ?> </label>
+      <input type="email" value="" name="supporter-email" class="required email form-control input-lg" id="mce-EMAIL" placeholder="<?php _e('Email'); ?>">
       <div class="help-block"><?php _e('Missing Email', 'sage'); ?></div>
     </div>
 <!--<div class="mc-field-group form-group text-left">
@@ -33,7 +33,7 @@
     </div>
     <div class="clear form-group-submit">
       <input type="hidden" name="cnc-package-id" value="<?php echo $package_id; ?>">
-      <input type="submit" value="<?php _e('I support Transparency International Hungary!', 'sage'); ?>" name="subscribe" id="mc-embedded-subscribe" class="button btn btn-primary">
+      <input type="submit" value="<?php _e('I support Transparency International Hungary!', 'sage'); ?>" name="donation-submitted" id="mc-embedded-subscribe" class="button btn btn-primary">
     </div>
   </div>
   <!-- <p class="footnote"><?php _e('You can cancel your subscription any time.', 'sage'); ?></p> -->

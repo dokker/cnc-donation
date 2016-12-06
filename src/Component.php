@@ -10,6 +10,7 @@ class Component {
 	private $test;
 	private $db_table = 'cnc_donation';
 	private $providers = ['cib', 'paypal'];
+	private $contact;
 
 	function __construct()
 	{
@@ -293,6 +294,45 @@ class Component {
 			} else {
 				// Single payment selected
 				$sp_response = $this->startSP($amount, $provider);
+			}
+		}
+	}
+
+	/**
+	 * Analayze donation form data and control behaviour
+	 * @return bool Form processing successful
+	 */
+	public function processPopupDonationForm()
+	{
+		$this->initConfig();
+		if ($package = intval($_POST['cnc-package-id'])) {
+			$this->generateTransactionValues();
+			$this->contact = [
+				'email' => sanitize_text_field($_POST['supporter-email']),
+				'name' => sanitize_text_field($_POST['supporter-name']),
+			];
+			switch ($package) {
+				case 1:
+					$rp_response = $this->startRP($amount);
+					$amount = 1000;
+					break;
+				case 2:
+					$amount = 5000;
+					$rp_response = $this->startRP($amount);
+					break;
+				case 3:
+					$amount = 10000;
+					$rp_response = $this->startRP($amount);
+					break;
+				case 4:
+					if (!empty($_POST['cnc-recurring-amount'])) {
+						$amount = intval($_POST['cnc-recurring-amount']);
+						$rp_response = $this->startRP($amount);
+					} else {
+						$amount = intval($_POST['cnc-single-amount']);
+						$sp_response = $this->startSP($amount, 'CIB');
+					}
+					break;
 			}
 		}
 	}
