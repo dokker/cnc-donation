@@ -74,6 +74,19 @@ class CRM {
 	}
 
 	/**
+	 * Get CRM contact by email
+	 * @param  string $email Email address
+	 * @return string        JSON response data
+	 */
+	public function getContactByEmail($email)
+	{
+		$this->error = false;
+		$this->error_msg = '';
+		$result = $this->curl_wrap("contacts/search/email/" . $email, null, "GET", "application/json");
+		return $result;
+	}
+
+	/**
 	 * Create contact in Agile CRM
 	 * @param  string $first_name First name
 	 * @param  string $last_name  Last name
@@ -143,7 +156,7 @@ class CRM {
 			}
 		} else {
 			$this->error = true;
-			$this->error_msg = $response;
+			$this->error_msg = __('Error: ', 'cnc-donation') . $result;
 			return false;
 		}
 	}
@@ -154,6 +167,6 @@ class CRM {
 	 */
 	public function getLastError()
 	{
-		echo $this->error_msg;
+		return $this->error_msg;
 	}
 }
