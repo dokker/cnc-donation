@@ -68,6 +68,7 @@ class Component {
 				`status` CHAR (30) NOT NULL,
 				`amount` INT(11) NOT NULL,
 				`provider` CHAR (30),
+				`client` TEXT,
 				UNIQUE KEY id (id)
 				) $charset_collate;";
 
@@ -129,7 +130,7 @@ class Component {
 				/**
 				 * Start PMGW transaction
 				 */
-				$this->storeTransaction($response->TransactionId, 'single', $amount, $provider);
+				$this->storeTransaction($response->TransactionId, 'single', $amount, $provider, $this->contact);
 				$start_response = \BigFish\PaymentGateway::start(new \BigFish\PaymentGateway\Request\Start($response->TransactionId));
 				return $start_response;
 			}
@@ -186,7 +187,7 @@ class Component {
 				/**
 				 * Start PMGW transaction
 				 */
-				$this->storeTransaction($response->TransactionId, 'recurring', $amount, $provider);
+				$this->storeTransaction($response->TransactionId, 'recurring', $amount, $provider, $this->contact);
 				$start_response = \BigFish\PaymentGateway::start(new \BigFish\PaymentGateway\Request\Start($response->TransactionId));
 				return $start_response;
 			}
@@ -233,11 +234,11 @@ class Component {
 	 * @param string $transaction_id Referenced transaction ID
 	 * @return int,boolean  Affected number of rows or FALSE
 	 */
-	private function storeTransaction($transaction_id, $type, $amount, $provider)
+	private function storeTransaction($transaction_id, $type, $amount, $provider, $contact = [])
 	{
-		return $this->db->query( 
-			$this->db->prepare("INSERT INTO {$this->db_table} (`id`, `order_id`, `transaction_id`, `tdate`, `type`, `status`, `amount`, `provider`) VALUES ( NULL, %s, %s, %s, %s, %s, %d, %s )",
-			$this->orderID, $transaction_id, current_time('mysql', 1), $type, 'pending', $amount, $provider) 
+		return $this->db->query(
+			$this->db->prepare("INSERT INTO {$this->db_table} (`id`, `order_id`, `transaction_id`, `tdate`, `type`, `status`, `amount`, `provider`) VALUES ( NULL, %s, %s, %s, %s, %s, %d, %s, %s )",
+			$this->orderID, $transaction_id, current_time('mysql', 1), $type, 'pending', $amount, $provider, json_encode($contact))
 		);
 	}
 
