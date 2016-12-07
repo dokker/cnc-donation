@@ -83,7 +83,13 @@
 		});
 
 		$('.donation-popup form').submit(function(e) {
-			if(!validateNlForm() || !validateDonationAmount()) {
+			if(!validateNlForm()) {
+				e.preventDefault();
+			}
+		});
+
+		$('.donation-popup form.indie').submit(function(e) {
+			if(!validateDonationAmount()) {
 				e.preventDefault();
 			}
 		});
