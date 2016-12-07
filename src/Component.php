@@ -68,7 +68,7 @@ class Component {
 				`status` CHAR (30) NOT NULL,
 				`amount` INT(11) NOT NULL,
 				`provider` CHAR (30),
-				`client` TEXT,
+				`contact` TEXT,
 				UNIQUE KEY id (id)
 				) $charset_collate;";
 
@@ -243,6 +243,17 @@ class Component {
 	}
 
 	/**
+	 * Get contact data by transaction ID
+	 * @param  int $transaction_id Transaction ID
+	 * @return string                 Contact JSON data
+	 */
+	public function getContactInfo($transaction_id)
+	{
+		return $this->db->get_var("SELECT `contact` FROM {$this->db_table}
+			WHERE `transaction_id` = '{$transaction_id}'");
+	}
+
+	/**
 	 * Update transaction status
 	 * @param  string $transaction_id Reference transaction ID
 	 * @param  string $status         Status value
@@ -311,6 +322,7 @@ class Component {
 			$this->contact = [
 				'email' => sanitize_text_field($_POST['supporter-email']),
 				'name' => sanitize_text_field($_POST['supporter-name']),
+				'package' => $package
 			];
 			switch ($package) {
 				case 1:
@@ -370,6 +382,16 @@ class Component {
 				$transaction_id = sanitize_text_field($_GET['TransactionId']);
 				if($this->checkPaymentResult($transaction_id)) {
 					// Successful transaction
+
+					$contact = json_decode($this->getContactInfo($transaction_id));
+					$name = explode(' ', $contact->name);
+					$lastname = array_pop($name);
+					$firstname = implode(" ", $name);
+					if (!empty($contact)) {
+						$crm = new CRM();
+						$crm_result = $crm->checkResult($crm->createContact($firstname, $lastname, $contact->email, ['donation-' . $contact->package]));
+					}
+
 					$type = $this->getTransactionType($transaction_id);
 					switch ($type) {
 						case 'recurring':
