@@ -539,7 +539,15 @@ class Component {
 	{
 		wp_enqueue_script('cnc-donation-main');
 		$view = new View();
-		return $view->render('sc-payment-indie');
+
+		$terms = $view->render('terms-' . $this->getCurrentLanguage());
+		$view->assign('terms', $terms);
+
+		$html = $view->render('sc-payment-indie');
+		$view->assign('package_id', 4);
+		$view->assign('package_name', __('Unique Donation', 'cnc-donation'));
+		$html .= $view->render('popup-donation-indie');
+		return $html;
 	}
 
 	private function getCurrentLanguage()

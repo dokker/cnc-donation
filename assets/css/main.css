@@ -109,6 +109,14 @@
 	text-align: center;
 }
 
+.donation-popup .info-block {
+	width: 100%;
+	max-width: 440px;
+	margin: 0 auto 20px;
+	text-align: left;
+	font-size: 1.1em;
+}
+
 .form-group-submit {
 	margin: 30px 0;
 }
