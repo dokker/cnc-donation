@@ -2,7 +2,7 @@
 <!-- Begin MailChimp Signup Form -->
 <img src="<?php echo get_template_directory_uri(); ?>/dist/images/TI_logo_hrl.png" alt="Transparency International logo" class="logo" />
 <div class="donation-package">
-<form action="" method="post" id="" name="donation-package-form" class="">
+<form action="<?php echo get_site_url(); ?>/cnc-donation" method="post" id="" name="donation-package-form" class="">
   <div id="mc_embed_signup_scroll">
     <h3 class="title"><?php echo $package_name; ?></h3>
     <div class="terms"><?php echo $terms; ?></div>

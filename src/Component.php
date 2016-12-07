@@ -237,7 +237,7 @@ class Component {
 	private function storeTransaction($transaction_id, $type, $amount, $provider, $contact = [])
 	{
 		return $this->db->query(
-			$this->db->prepare("INSERT INTO {$this->db_table} (`id`, `order_id`, `transaction_id`, `tdate`, `type`, `status`, `amount`, `provider`) VALUES ( NULL, %s, %s, %s, %s, %s, %d, %s, %s )",
+			$this->db->prepare("INSERT INTO {$this->db_table} (`id`, `order_id`, `transaction_id`, `tdate`, `type`, `status`, `amount`, `provider`, `contact`) VALUES ( NULL, %s, %s, %s, %s, %s, %d, %s, %s )",
 			$this->orderID, $transaction_id, current_time('mysql', 1), $type, 'pending', $amount, $provider, json_encode($contact))
 		);
 	}
@@ -314,8 +314,8 @@ class Component {
 			];
 			switch ($package) {
 				case 1:
-					$rp_response = $this->startRP($amount);
 					$amount = 1000;
+					$rp_response = $this->startRP($amount);
 					break;
 				case 2:
 					$amount = 5000;
