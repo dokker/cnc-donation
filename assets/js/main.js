@@ -10,15 +10,15 @@
   function validateNlForm() {
     $('.donation-popup .form-group').removeClass('has-error');
     var $email = $(".donation-popup .form-control[type=email]");
-    var $text = $(".donation-popup .form-control[type=text]");
+    var $name = $(".donation-popup .form-control[type=text].input-name");
     var $terms = $(".donation-popup .custom-control-input.terms-accept");
     var validate = true;
     if (!$email.val() || !validateEmail($email.val())) {
       $email.parent().addClass('has-error');
       validate = false;
     }
-    if (!$text.val()) {
-      $text.parent().addClass('has-error');
+    if (!$name.val()) {
+      $name.parent().addClass('has-error');
       validate = false;
     }
     if (!$terms.is(':checked')) {
@@ -26,6 +26,35 @@
       validate = false;
     }
     return validate;
+  }
+
+  function validateDonationAmount() {
+    var $donate_single = $(".donation-popup .input-donate-single");
+    var $donate_recurring = $(".donation-popup .input-donate-recurring");
+    var validate = true;
+    if (!$donate_single.val() && !$donate_recurring.val()) {
+      $donate_single.parent().addClass('has-error');
+      $donate_recurring.parent().addClass('has-error');
+      validate = false;
+    }
+    return validate;
+  }
+
+  function handleMultipleAmounts() {
+    var $donate_single = $(".donation-popup .input-donate-single");
+    var $donate_recurring = $(".donation-popup .input-donate-recurring");
+    $donate_single.keyup(function() {
+    	$donate_recurring.val('');
+    });
+    $donate_recurring.keyup(function() {
+    	$donate_single.val('');
+    });
+    $donate_single.change(function() {
+    	$donate_recurring.val('');
+    });
+    $donate_recurring.change(function() {
+    	$donate_single.val('');
+    });
   }
 
 	function init_donation_popup() {
@@ -54,7 +83,7 @@
 		});
 
 		$('.donation-popup form').submit(function(e) {
-			if(!validateNlForm()) {
+			if(!validateNlForm() || !validateDonationAmount()) {
 				e.preventDefault();
 			}
 		});
@@ -62,6 +91,8 @@
 		$('.donation-popup form input').focusout(function(e) {
 			validateNlForm();
 		});
+
+		handleMultipleAmounts();
 	}
 
 	init_donation_popup();
