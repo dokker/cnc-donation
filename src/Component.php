@@ -379,9 +379,11 @@ class Component {
 							$message = $view->render('transaction-success-single');
 						break;
 					}
+					$this->updateTransactionStatus($transaction_id, 'successful');
 					return $this->statusMessage($message, 'success');
 				} else {
 					// Transaction failed
+					$this->updateTransactionStatus($transaction_id, 'failed');
 					$message = $view->render('transaction-error');
 					return $this->statusMessage($message, 'error');
 				}
