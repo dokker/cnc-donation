@@ -27,16 +27,16 @@
       <label class="custom-control custom-checkbox">
         <input type="checkbox" class="custom-control-input terms-accept">
         <span class="custom-control-indicator"></span>
-        <span class="custom-control-description">I accept the terms and conditions</span>
+        <span class="custom-control-description"><?php _e('I accept the terms and conditions', 'cnc-donation'); ?></span>
       </label>
-      <div class="help-block"><?php _e('You have to accept the terms and conditions.', 'sage'); ?></div>
+      <div class="help-block"><?php _e('You have to accept the terms and conditions.', 'cnc-donation'); ?></div>
     </div>
     <div class="clear form-group-submit">
       <input type="hidden" name="cnc-package-id" value="<?php echo $package_id; ?>">
-      <input type="submit" value="<?php _e('I support Transparency International Hungary!', 'sage'); ?>" name="donation-submitted" id="mc-embedded-subscribe" class="button btn btn-primary">
+      <input type="submit" value="<?php _e('I support Transparency International Hungary!', 'cnc-donation'); ?>" name="donation-submitted" id="mc-embedded-subscribe" class="button btn btn-primary">
     </div>
   </div>
-  <!-- <p class="footnote"><?php _e('You can cancel your subscription any time.', 'sage'); ?></p> -->
+  <!-- <p class="footnote"><?php _e('You can cancel your subscription any time.', 'cnc-donation'); ?></p> -->
 </form>
 </div>
 

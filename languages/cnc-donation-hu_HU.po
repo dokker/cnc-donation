@@ -1,63 +1,182 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: cnc Donation Plugin 1.0\n"
-"POT-Creation-Date: 2016-07-20 14:57+0200\n"
-"PO-Revision-Date: 2016-07-20 14:58+0200\n"
+"POT-Creation-Date: 2016-12-08 11:34+0100\n"
+"PO-Revision-Date: 2016-12-08 11:35+0100\n"
 "Last-Translator: docker <dock3r@gmail.com>\n"
 "Language-Team: colorandcode <denes@colorandcode.hu>\n"
 "Language: hu_HU\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 1.8.11\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-KeywordsList: __\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: src/Component.php:234
+#: src/CRM.php:159
+msgid "Error: "
+msgstr "Hiba: "
+
+#: src/Component.php:480
+msgid "Once Every 30 Days"
+msgstr "30 naponta egyszer"
+
+#: src/Component.php:558 templates/sc-payment-packages.tpl.php:5
+msgid "Ally of Transparency"
+msgstr "Átláthatóság támogatója"
+
+#: src/Component.php:561 templates/sc-payment-packages.tpl.php:13
+msgid "Champion of Integrity"
+msgstr "Becsületesség bajnoka"
+
+#: src/Component.php:564 templates/sc-payment-packages.tpl.php:21
+msgid "Anti-Corruption Superhero"
+msgstr "Korrupcióellenes szuperhős"
+
+#: src/Component.php:583 templates/sc-payment-indie.tpl.php:5
+msgid "Unique Donation"
+msgstr "Egyedi adományozó"
+
+#: templates/form-donation.tpl.php:3
 msgid "Amount"
 msgstr "Adomány összege"
 
-#: src/Component.php:238
+#: templates/form-donation.tpl.php:7
 msgid "Given amount"
 msgstr "Meghatározott összeg"
 
-#: src/Component.php:239
+#: templates/form-donation.tpl.php:8
 msgid "Given amount of donation"
 msgstr "Meghatározott össszegű adomány"
 
-#: src/Component.php:241
+#: templates/form-donation.tpl.php:10
 msgid "Donation frequency"
 msgstr "Adomány rendszeressége"
 
-#: src/Component.php:242
+#: templates/form-donation.tpl.php:11
 msgid "Regular monthly donation"
 msgstr "Havi, rendszeres"
 
-#: src/Component.php:243
+#: templates/form-donation.tpl.php:12
 msgid "One-off donation"
 msgstr "Egyszeri"
 
-#: src/Component.php:244
+#: templates/form-donation.tpl.php:13
 msgid "Payment method"
 msgstr "Fizetési mód"
 
-#: src/Component.php:245
+#: templates/form-donation.tpl.php:14
 msgid "CIB"
 msgstr "CIB"
 
-#: src/Component.php:246
+#: templates/form-donation.tpl.php:15
 msgid "PayPal"
 msgstr "PayPal"
 
-#: src/Component.php:247
+#: templates/form-donation.tpl.php:16
 msgid "Send"
 msgstr "Küldés"
 
-#: src/Component.php:403
-msgid "Once Every 30 Days"
-msgstr "30 naponta egyszer"
+#: templates/popup-donation-indie.tpl.php:10
+#: templates/popup-donation-indie.tpl.php:11
+msgid "One-time Unique Donation (Ft)"
+msgstr "Egyszeri adomány (Ft)"
+
+#: templates/popup-donation-indie.tpl.php:14
+#: templates/popup-donation-indie.tpl.php:15
+msgid "Monthly Unique Donation (Ft)"
+msgstr "Havi rendszeres adomány (Ft)"
+
+#: templates/popup-donation-indie.tpl.php:16
+msgid "Missing unique donation amount"
+msgstr "Hiányzó egyedi adomány összeg"
+
+#: templates/popup-donation-indie.tpl.php:18
+msgid ""
+"If you donate above HUF 15,000 we offer you a Transparency International "
+"gift package."
+msgstr ""
+"Ha 15.000 Ft felett támogatsz minket, egy Transparency International "
+"ajándékcsomaggal lepünk meg."
+
+#: templates/popup-donation-indie.tpl.php:20
+#: templates/popup-donation-indie.tpl.php:21
+#: templates/popup-donation-package.tpl.php:10
+#: templates/popup-donation-package.tpl.php:11
+msgid "Name"
+msgstr "Név"
+
+#: templates/popup-donation-indie.tpl.php:22
+#: templates/popup-donation-package.tpl.php:12
+msgid "Missing name"
+msgstr "Hiányzó név"
+
+#: templates/popup-donation-indie.tpl.php:25
+#: templates/popup-donation-indie.tpl.php:26
+#: templates/popup-donation-package.tpl.php:15
+#: templates/popup-donation-package.tpl.php:16
+msgid "Email"
+msgstr "E-mail cím"
+
+#: templates/popup-donation-indie.tpl.php:27
+#: templates/popup-donation-package.tpl.php:17
+msgid "Missing Email"
+msgstr "Hiányzó E-mail cím"
+
+#: templates/popup-donation-indie.tpl.php:33
+#: templates/popup-donation-package.tpl.php:30
+msgid "I accept the terms and conditions"
+msgstr "Elfogadom a feltételeket"
+
+#: templates/popup-donation-indie.tpl.php:35
+#: templates/popup-donation-package.tpl.php:32
+msgid "You have to accept the terms and conditions."
+msgstr "El kell fogadnod a feltételeket."
+
+#: templates/popup-donation-indie.tpl.php:39
+#: templates/popup-donation-package.tpl.php:36
+msgid "I support Transparency International Hungary!"
+msgstr "Támogatom!"
+
+#: templates/popup-donation-indie.tpl.php:42
+#: templates/popup-donation-package.tpl.php:39
+msgid "You can cancel your subscription any time."
+msgstr "Hírlevelünkről bármikor leiratkozhat!"
+
+#: templates/sc-payment-indie.tpl.php:6 templates/sc-payment-packages.tpl.php:6
+#: templates/sc-payment-packages.tpl.php:14
+#: templates/sc-payment-packages.tpl.php:22
+msgid "Ft"
+msgstr "Ft"
+
+#: templates/sc-payment-indie.tpl.php:7
+msgid ""
+"Itt választhat, hogy egyszeri vagy havi adománnyal támogat bennünket. Ha "
+"15.000 Ft felett adományoz, egy Transparency International ajándékcsomaggal "
+"lepjük meg Önt."
+msgstr ""
+
+#: templates/sc-payment-packages.tpl.php:7
+#: templates/sc-payment-packages.tpl.php:23
+msgid ""
+"Ha havonta 10.000 forinttal támogat minket a hírlevél, a sajtóközlemény és "
+"személyre szóló meghívó mellett, részt vehet exkluzív rendezvényeinken,"
+"valamint a nyomtatott kiadványainkból postázunk önnek egy példányt."
+msgstr ""
+
+#: templates/sc-payment-packages.tpl.php:15
+msgid ""
+"Ha havi 5000 forinttal támogat bennünket, a hírlevél és a sajtóközlemény "
+"mellett személyre szóló meghívót kap eseményeinkre, ahol találkozhat velünk "
+"és szakértőinkkel, meghívott előadóinkkal. "
+msgstr ""
+
+#: templates/transaction-success-single.tpl.php:1
+msgid "Sikeres tranzakció! Köszönjük támogatását!"
+msgstr ""
 
 #~ msgid "Monthly, regular"
 #~ msgstr "Havi, rendszeres"

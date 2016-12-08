@@ -4,7 +4,7 @@
 			<div class="item-wrap">
 				<p class="title"><?php _e('Ally of Transparency', 'cnc-donation'); ?></p>
 				<p class="amount">1000 <?php _e('Ft', 'cnc-donation'); ?></p>
-				<p class="description"><?php _e('Ha havonta 10.000 forinttal támogat minket a hírlevél, a sajtóközlemény és személyre szóló meghívó mellett, részt vehet exkluzív rendezvényeinken,valamint a nyomtatott kiadványainkból postázunk önnek egy példányt.', 'cnc-donation'); ?></p>
+				<p class="description"><?php _e('Ha havi 1000 forinttal támogat bennünket, a hírlevél mellett elsőként értesülhet sajtóközleményeinkről is, amelyet a publikálás pillanatában elküldünk Önnek.', 'cnc-donation'); ?></p>
 			</div>
 			<a class="package-selector" data-id="1" href="<?php echo get_site_url(); ?>/adomanyozas-static"></a>
 		</div>
