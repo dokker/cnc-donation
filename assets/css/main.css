@@ -97,6 +97,7 @@
 	margin-bottom: 15px;
 	padding: 10px 7px;
 	text-align: left;
+	resize: vertical;
 }
 
 .donation-popup .has-error .help-block {
