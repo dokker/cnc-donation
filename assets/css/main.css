@@ -68,7 +68,7 @@
 
 .payment-packages .package-indie {
 	border: 2px solid #0476c7;
-	background: transparent;
+	background-color: transparent;
 }
 
 .package-indie .amount {
@@ -76,7 +76,6 @@
 }
 
 .package-indie .description {
-	color: #000;
 	font-size: 1em;
 }
 
