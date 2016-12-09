@@ -1,1 +1,1 @@
-<strong><?php _e('Sikeres tranzakció! Köszönjük támogatását!', 'sage'); ?></strong>
+<strong><?php _e('Successful transaction! Thank you for your donation!', 'sage'); ?></strong>

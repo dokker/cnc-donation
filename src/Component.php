@@ -515,7 +515,9 @@ class Component {
 		return '<div class="status-wrap status-' . $type . '">
 			<div class="status-message">' . $message . '
 			<p><a class="new-transaction" href="
-			' . strtok($_SERVER["REQUEST_URI"],'?') . '#cnc-donation">Új tranzakció kezdeményezése</a></p>
+			' . strtok($_SERVER["REQUEST_URI"],'?') . '">' .
+			__('Initiate a new transaction', 'cnc-donation') .
+			'</a></p>
 			</div></div>';
 	}
 
