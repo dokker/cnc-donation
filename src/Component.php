@@ -10,6 +10,7 @@ class Component {
 	private $test;
 	private $db_table = 'cnc_donation';
 	private $providers = ['cib', 'paypal'];
+	private $contact;
 
 	function __construct()
 	{
@@ -67,6 +68,7 @@ class Component {
 				`status` CHAR (30) NOT NULL,
 				`amount` INT(11) NOT NULL,
 				`provider` CHAR (30),
+				`contact` TEXT,
 				UNIQUE KEY id (id)
 				) $charset_collate;";
 
@@ -128,7 +130,7 @@ class Component {
 				/**
 				 * Start PMGW transaction
 				 */
-				$this->storeTransaction($response->TransactionId, 'single', $amount, $provider);
+				$this->storeTransaction($response->TransactionId, 'single', $amount, $provider, $this->contact);
 				$start_response = \BigFish\PaymentGateway::start(new \BigFish\PaymentGateway\Request\Start($response->TransactionId));
 				return $start_response;
 			}
@@ -185,7 +187,7 @@ class Component {
 				/**
 				 * Start PMGW transaction
 				 */
-				$this->storeTransaction($response->TransactionId, 'recurring', $amount, $provider);
+				$this->storeTransaction($response->TransactionId, 'recurring', $amount, $provider, $this->contact);
 				$start_response = \BigFish\PaymentGateway::start(new \BigFish\PaymentGateway\Request\Start($response->TransactionId));
 				return $start_response;
 			}
@@ -232,12 +234,23 @@ class Component {
 	 * @param string $transaction_id Referenced transaction ID
 	 * @return int,boolean  Affected number of rows or FALSE
 	 */
-	private function storeTransaction($transaction_id, $type, $amount, $provider)
+	private function storeTransaction($transaction_id, $type, $amount, $provider, $contact = [])
 	{
-		return $this->db->query( 
-			$this->db->prepare("INSERT INTO {$this->db_table} (`id`, `order_id`, `transaction_id`, `tdate`, `type`, `status`, `amount`, `provider`) VALUES ( NULL, %s, %s, %s, %s, %s, %d, %s )",
-			$this->orderID, $transaction_id, current_time('mysql', 1), $type, 'pending', $amount, $provider) 
+		return $this->db->query(
+			$this->db->prepare("INSERT INTO {$this->db_table} (`id`, `order_id`, `transaction_id`, `tdate`, `type`, `status`, `amount`, `provider`, `contact`) VALUES ( NULL, %s, %s, %s, %s, %s, %d, %s, %s )",
+			$this->orderID, $transaction_id, current_time('mysql', 1), $type, 'pending', $amount, $provider, json_encode($contact))
 		);
+	}
+
+	/**
+	 * Get contact data by transaction ID
+	 * @param  int $transaction_id Transaction ID
+	 * @return string                 Contact JSON data
+	 */
+	public function getContactInfo($transaction_id)
+	{
+		return $this->db->get_var("SELECT `contact` FROM {$this->db_table}
+			WHERE `transaction_id` = '{$transaction_id}'");
 	}
 
 	/**
@@ -298,6 +311,46 @@ class Component {
 	}
 
 	/**
+	 * Analayze donation form data and control behaviour
+	 * @return bool Form processing successful
+	 */
+	public function processPopupDonationForm()
+	{
+		$this->initConfig();
+		if ($package = intval($_POST['cnc-package-id'])) {
+			$this->generateTransactionValues();
+			$this->contact = [
+				'email' => sanitize_text_field($_POST['supporter-email']),
+				'name' => sanitize_text_field($_POST['supporter-name']),
+				'package' => $package
+			];
+			switch ($package) {
+				case 1:
+					$amount = 1000;
+					$rp_response = $this->startRP($amount);
+					break;
+				case 2:
+					$amount = 5000;
+					$rp_response = $this->startRP($amount);
+					break;
+				case 3:
+					$amount = 10000;
+					$rp_response = $this->startRP($amount);
+					break;
+				case 4:
+					if (!empty($_POST['cnc-recurring-amount'])) {
+						$amount = intval($_POST['cnc-recurring-amount']);
+						$rp_response = $this->startRP($amount);
+					} else {
+						$amount = intval($_POST['cnc-single-amount']);
+						$sp_response = $this->startSP($amount, 'CIB');
+					}
+					break;
+			}
+		}
+	}
+
+	/**
 	 * Handles form shortcode generation
 	 */
 	public function donationFormShortcode()
@@ -329,6 +382,16 @@ class Component {
 				$transaction_id = sanitize_text_field($_GET['TransactionId']);
 				if($this->checkPaymentResult($transaction_id)) {
 					// Successful transaction
+
+					$contact = json_decode($this->getContactInfo($transaction_id));
+					$name = explode(' ', $contact->name);
+					$lastname = array_pop($name);
+					$firstname = implode(" ", $name);
+					if (!empty($contact)) {
+						$crm = new CRM();
+						$crm_result = $crm->checkResult($crm->createContact($firstname, $lastname, $contact->email, ['donation-' . $contact->package]));
+					}
+
 					$type = $this->getTransactionType($transaction_id);
 					switch ($type) {
 						case 'recurring':
@@ -338,9 +401,11 @@ class Component {
 							$message = $view->render('transaction-success-single');
 						break;
 					}
+					$this->updateTransactionStatus($transaction_id, 'successful');
 					return $this->statusMessage($message, 'success');
 				} else {
 					// Transaction failed
+					$this->updateTransactionStatus($transaction_id, 'failed');
 					$message = $view->render('transaction-error');
 					return $this->statusMessage($message, 'error');
 				}
@@ -450,7 +515,9 @@ class Component {
 		return '<div class="status-wrap status-' . $type . '">
 			<div class="status-message">' . $message . '
 			<p><a class="new-transaction" href="
-			' . strtok($_SERVER["REQUEST_URI"],'?') . '#cnc-donation">Új tranzakció kezdeményezése</a></p>
+			' . strtok($_SERVER["REQUEST_URI"],'?') . '">' .
+			__('Initiate a new transaction', 'cnc-donation') .
+			'</a></p>
 			</div></div>';
 	}
 
@@ -498,7 +565,15 @@ class Component {
 	{
 		wp_enqueue_script('cnc-donation-main');
 		$view = new View();
-		return $view->render('sc-payment-indie');
+
+		$terms = $view->render('terms-' . $this->getCurrentLanguage());
+		$view->assign('terms', $terms);
+
+		$html = $view->render('sc-payment-indie');
+		$view->assign('package_id', 4);
+		$view->assign('package_name', __('Unique Donation', 'cnc-donation'));
+		$html .= $view->render('popup-donation-indie');
+		return $html;
 	}
 
 	private function getCurrentLanguage()

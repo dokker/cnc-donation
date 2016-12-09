@@ -2,10 +2,20 @@
 <!-- Begin MailChimp Signup Form -->
 <img src="<?php echo get_template_directory_uri(); ?>/dist/images/TI_logo_hrl.png" alt="Transparency International logo" class="logo" />
 <div class="donation-package">
-<form action="<?php echo get_site_url(); ?>/cnc-donation" method="post" id="" name="donation-package-form" class="">
+<form action="<?php echo get_site_url(); ?>/cnc-donation" method="post" id="" name="donation-package-form" class="indie">
   <div id="mc_embed_signup_scroll">
     <h3 class="title"><?php echo $package_name; ?></h3>
     <div class="terms"><?php echo $terms; ?></div>
+    <div class="mc-field-group form-group">
+      <label class="sr-only" for="cnc-single-amount"><?php _e('One-time Unique Donation (HUF)', 'cnc-donation'); ?> </label>
+      <input type="text" value="" name="cnc-single-amount" class="form-control input-lg input-donate-single unique-amount" id="cnc-single-amount" placeholder="<?php _e('One-time Unique Donation (HUF)', 'cnc-donation'); ?>">
+    </div>
+    <div class="mc-field-group form-group">
+      <label class="sr-only" for="cnc-recurring-amount"><?php _e('Monthly Unique Donation (HUF)', 'sage'); ?> </label>
+      <input type="text" value="" name="cnc-recurring-amount" class="form-control input-lg input-donate-recurring unique-amount" id="cnc-recurring-amount" placeholder="<?php _e('Monthly Unique Donation (HUF)', 'cnc-donation'); ?>">
+      <div class="help-block"><?php _e('Missing unique donation amount', 'cnc-donation'); ?></div>
+    </div>
+    <p class="info-block"><?php _e('If you donate above HUF 15,000 we offer you a Transparency International gift package.', 'cnc-donation'); ?></p>
     <div class="mc-field-group form-group">
       <label class="sr-only" for="supporter-name"><?php _e('Name', 'sage'); ?> </label>
       <input type="text" value="" name="supporter-name" class="form-control input-lg input-name" id="mce-MMERGE3" placeholder="<?php _e('Name'); ?>">
@@ -16,13 +26,6 @@
       <input type="email" value="" name="supporter-email" class="required email form-control input-lg" id="mce-EMAIL" placeholder="<?php _e('Email'); ?>">
       <div class="help-block"><?php _e('Missing Email', 'sage'); ?></div>
     </div>
-<!--<div class="mc-field-group form-group text-left">
-      <label class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input">
-        <span class="custom-control-indicator"></span>
-        <span class="custom-control-description">I would like to sign up for the Transparency Newsletter</span>
-      </label>
-    </div> -->
     <div class="mc-field-group form-group text-left">
       <label class="custom-control custom-checkbox">
         <input type="checkbox" class="custom-control-input terms-accept">

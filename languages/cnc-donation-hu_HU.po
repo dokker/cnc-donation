@@ -1,63 +1,266 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: cnc Donation Plugin 1.0\n"
-"POT-Creation-Date: 2016-07-20 14:57+0200\n"
-"PO-Revision-Date: 2016-07-20 14:58+0200\n"
+"POT-Creation-Date: 2016-12-09 13:20+0100\n"
+"PO-Revision-Date: 2016-12-09 13:20+0100\n"
 "Last-Translator: docker <dock3r@gmail.com>\n"
 "Language-Team: colorandcode <denes@colorandcode.hu>\n"
 "Language: hu_HU\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 1.8.11\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-KeywordsList: __\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: src/Component.php:234
+#: src/CRM.php:159
+msgid "Error: "
+msgstr "Hiba: "
+
+#: src/Component.php:480
+msgid "Once Every 30 Days"
+msgstr "30 naponta egyszer"
+
+#: src/Component.php:530
+msgid "Initiate a new transaction"
+msgstr "Új tranzakció kezdeményezése"
+
+#: src/Component.php:560 templates/sc-payment-packages.tpl.php:5
+msgid "Ally of Transparency"
+msgstr "Átláthatóság támogatója"
+
+#: src/Component.php:563 templates/sc-payment-packages.tpl.php:13
+msgid "Champion of Integrity"
+msgstr "Becsületesség bajnoka"
+
+#: src/Component.php:566 templates/sc-payment-packages.tpl.php:21
+msgid "Anti-Corruption Superhero"
+msgstr "Korrupcióellenes szuperhős"
+
+#: src/Component.php:585 templates/sc-payment-indie.tpl.php:5
+msgid "Unique Donation"
+msgstr "Egyedi adományozó"
+
+#: templates/form-donation.tpl.php:3
 msgid "Amount"
 msgstr "Adomány összege"
 
-#: src/Component.php:238
+#: templates/form-donation.tpl.php:7
 msgid "Given amount"
 msgstr "Meghatározott összeg"
 
-#: src/Component.php:239
+#: templates/form-donation.tpl.php:8
 msgid "Given amount of donation"
 msgstr "Meghatározott össszegű adomány"
 
-#: src/Component.php:241
+#: templates/form-donation.tpl.php:10
 msgid "Donation frequency"
 msgstr "Adomány rendszeressége"
 
-#: src/Component.php:242
+#: templates/form-donation.tpl.php:11
 msgid "Regular monthly donation"
 msgstr "Havi, rendszeres"
 
-#: src/Component.php:243
+#: templates/form-donation.tpl.php:12
 msgid "One-off donation"
 msgstr "Egyszeri"
 
-#: src/Component.php:244
+#: templates/form-donation.tpl.php:13
 msgid "Payment method"
 msgstr "Fizetési mód"
 
-#: src/Component.php:245
+#: templates/form-donation.tpl.php:14
 msgid "CIB"
 msgstr "CIB"
 
-#: src/Component.php:246
+#: templates/form-donation.tpl.php:15
 msgid "PayPal"
 msgstr "PayPal"
 
-#: src/Component.php:247
+#: templates/form-donation.tpl.php:16
 msgid "Send"
 msgstr "Küldés"
 
-#: src/Component.php:403
-msgid "Once Every 30 Days"
-msgstr "30 naponta egyszer"
+#: templates/popup-donation-indie.tpl.php:10
+#: templates/popup-donation-indie.tpl.php:11
+msgid "One-time Unique Donation (HUF)"
+msgstr "Egyszeri adomány (Ft)"
+
+#: templates/popup-donation-indie.tpl.php:14
+#: templates/popup-donation-indie.tpl.php:15
+msgid "Monthly Unique Donation (HUF)"
+msgstr "Havi rendszeres adomány (Ft)"
+
+#: templates/popup-donation-indie.tpl.php:16
+msgid "Missing unique donation amount"
+msgstr "Hiányzó egyedi adomány összeg"
+
+#: templates/popup-donation-indie.tpl.php:18
+msgid ""
+"If you donate above HUF 15,000 we offer you a Transparency International "
+"gift package."
+msgstr ""
+"Ha 15.000 Ft felett támogatsz minket, egy Transparency International "
+"ajándékcsomaggal lepünk meg."
+
+#: templates/popup-donation-indie.tpl.php:20
+#: templates/popup-donation-indie.tpl.php:21
+#: templates/popup-donation-package.tpl.php:10
+#: templates/popup-donation-package.tpl.php:11
+msgid "Name"
+msgstr "Név"
+
+#: templates/popup-donation-indie.tpl.php:22
+#: templates/popup-donation-package.tpl.php:12
+msgid "Missing name"
+msgstr "Hiányzó név"
+
+#: templates/popup-donation-indie.tpl.php:25
+#: templates/popup-donation-indie.tpl.php:26
+#: templates/popup-donation-package.tpl.php:15
+#: templates/popup-donation-package.tpl.php:16
+msgid "Email"
+msgstr "E-mail cím"
+
+#: templates/popup-donation-indie.tpl.php:27
+#: templates/popup-donation-package.tpl.php:17
+msgid "Missing Email"
+msgstr "Hiányzó E-mail cím"
+
+#: templates/popup-donation-indie.tpl.php:33
+#: templates/popup-donation-package.tpl.php:30
+msgid "I accept the terms and conditions"
+msgstr "Elfogadom a feltételeket"
+
+#: templates/popup-donation-indie.tpl.php:35
+#: templates/popup-donation-package.tpl.php:32
+msgid "You have to accept the terms and conditions."
+msgstr "El kell fogadnod a feltételeket."
+
+#: templates/popup-donation-indie.tpl.php:39
+#: templates/popup-donation-package.tpl.php:36
+msgid "I support Transparency International Hungary!"
+msgstr "Támogatom!"
+
+#: templates/popup-donation-indie.tpl.php:42
+#: templates/popup-donation-package.tpl.php:39
+msgid "You can cancel your subscription any time."
+msgstr "Hírlevelünkről bármikor leiratkozhat!"
+
+#: templates/sc-payment-indie.tpl.php:6 templates/sc-payment-packages.tpl.php:6
+#: templates/sc-payment-packages.tpl.php:14
+#: templates/sc-payment-packages.tpl.php:22
+msgid "HUF"
+msgstr "Ft"
+
+#: templates/sc-payment-indie.tpl.php:7
+msgid ""
+"Here you can choose whether you wish to support us with a one-time or "
+"monthly donation. If you donate above HUF 15,000 we offer you a Transparency "
+"International gift package."
+msgstr ""
+"Itt választhatja ki, ha tetszőleges összegű egyszeri vagy havi adománnyal "
+"szeretne minket támogatni. Ha 15000 forint felett adományoz, egy "
+"Transparency International ajándékcsomaggal lepjük meg Önt."
+
+#: templates/sc-payment-packages.tpl.php:7
+msgid ""
+"If you support us with a monthly donation of HUF 1,000 apart from our "
+"regular newsletters you will also receive our press releases the moment they "
+"are published."
+msgstr ""
+"Ha havi 1000 forinttal támogat bennünket, a hírlevél mellett elsőként "
+"értesülhet sajtóközleményeinkről is, amelyet a publikálás pillanatában "
+"elküldünk önnek."
+
+#: templates/sc-payment-packages.tpl.php:15
+msgid ""
+"With a monthly donation of HUF 5,000 in addition to our newsletters and "
+"press releases we will also send you personalized invitations to our events "
+"where you can meet our team, our experts, and the speakers at each event. "
+msgstr ""
+"Ha havi 5000 forinttal támogat bennünket, a hírlevél és a sajtóközlemény "
+"mellett személyre szóló meghívót kap eseményeinkre, ahol találkozhat velünk "
+"és szakértőinkkel, meghívott előadóinkkal. "
+
+#: templates/sc-payment-packages.tpl.php:23
+msgid ""
+"If you support us with a monthly donation of HUF 10,000 on top of receiving "
+"our newsletters, our press releases, and personalized invitations to our "
+"events, you will also be invited to our exclusive events, and we will also "
+"send you copies of our publications by mail."
+msgstr ""
+"Ha havonta 10.000 forinttal támogat minket a hírlevél, a sajtóközlemény és "
+"személyre szóló meghívó mellett, részt vehet exkluzív rendezvényeinken, "
+"valamint a nyomtatott kiadványainkból postázunk önnek egy példányt. "
+
+#: templates/transaction-success-recurring.tpl.php:1
+#: templates/transaction-success-single.tpl.php:1
+msgid "Successful transaction! Thank you for your donation!"
+msgstr "Sikeres tranzakció! Köszönjük támogatását!"
+
+#: templates/transaction-success-recurring.tpl.php:2
+msgid ""
+"If you wish to modify your monthly regular payments please follow the steps "
+"below:"
+msgstr ""
+"Amennyiben módosítani szeretne a rendszeres havi fizetésén, kövesse a "
+"következő lépéseket:"
+
+#: templates/transaction-success-recurring.tpl.php:3
+msgid "English language guide"
+msgstr "Angol nyelvű útmutató."
+
+#: templates/transaction-success-recurring.tpl.php:5
+msgid "Log in to your PayPal account."
+msgstr "Jelentkezzen be a PayPal fiókjába."
+
+#: templates/transaction-success-recurring.tpl.php:6
+msgid "Click <b>Profile</b> near the top of the page."
+msgstr "Kattintson a „Profile” gombra a lap tetején."
+
+#: templates/transaction-success-recurring.tpl.php:7
+msgid "Click <b>My money</b>"
+msgstr "Kattintson a „My money” gombra."
+
+#: templates/transaction-success-recurring.tpl.php:8
+msgid ""
+"Click <b>Update </b>in the <strong>My preapproved payments </strong>section."
+msgstr "Kattintson az „Update” gombra a „My preapproved payments” menü alatt."
+
+#: templates/transaction-success-recurring.tpl.php:9
+msgid ""
+"Click <b>Cancel</b> or <b>Cancel automatic billing</b> and follow the "
+"instructions."
+msgstr ""
+"Kattintson a „Cancel” vagy „Cancel automatic billing” gombra és kövesse a "
+"további utasításokat."
+
+#: templates/transaction-success-recurring.tpl.php:11
+msgid "In case you don’t have a PayPal account:"
+msgstr "Amennyiben nem rendelkezik paypal fiókkal:"
+
+#: templates/transaction-success-recurring.tpl.php:13
+msgid "Go to the PayPal website."
+msgstr "Keresse fel a PayPal weboldalát."
+
+#: templates/transaction-success-recurring.tpl.php:14
+msgid "Click <b>Contact Us</b> at the bottom of any page."
+msgstr "Kattintson a „Contact us” gombra az oldal alján."
+
+#: templates/transaction-success-recurring.tpl.php:15
+msgid ""
+"Click <b>Call Us</b>, then click <b>Continue</b> for our Customer Service "
+"phone number."
+msgstr ""
+"Kattintson a „Call us” gombra, majd kattintson a „Continue” gombra, hogy "
+"elérje a PayPal ügyfélszolgálatának telefonszámát."
+
+#~ msgid "Ft"
+#~ msgstr "Ft"
 
 #~ msgid "Monthly, regular"
 #~ msgstr "Havi, rendszeres"

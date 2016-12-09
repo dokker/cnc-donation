@@ -68,7 +68,7 @@
 
 .payment-packages .package-indie {
 	border: 2px solid #0476c7;
-	background: transparent;
+	background-color: transparent;
 }
 
 .package-indie .amount {
@@ -76,7 +76,6 @@
 }
 
 .package-indie .description {
-	color: #000;
 	font-size: 1em;
 }
 
@@ -98,6 +97,7 @@
 	margin-bottom: 15px;
 	padding: 10px 7px;
 	text-align: left;
+	resize: vertical;
 }
 
 .donation-popup .has-error .help-block {
@@ -107,6 +107,14 @@
 .donation-popup .help-block {
 	display: none;
 	text-align: center;
+}
+
+.donation-popup .info-block {
+	width: 100%;
+	max-width: 440px;
+	margin: 0 auto 20px;
+	text-align: left;
+	font-size: 1.1em;
 }
 
 .form-group-submit {
