@@ -35,7 +35,7 @@
       <div class="help-block"><?php _e('You have to accept the terms and conditions.', 'cnc-donation'); ?></div>
     </div>
     <div class="clear form-group-submit">
-      <input type="hidden" name="cnc-package-id" value="<?php echo $package_id; ?>">
+      <input type="hidden" class="cnc-package-id" name="cnc-package-id" value="<?php echo $package_id; ?>">
       <input type="submit" value="<?php _e('I support Transparency International Hungary!', 'cnc-donation'); ?>" name="donation-submitted" id="mc-embedded-subscribe" class="button btn btn-primary">
     </div>
   </div>

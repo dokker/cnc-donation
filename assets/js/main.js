@@ -57,6 +57,42 @@
     });
   }
 
+  function donation_ga_events($package_id) {
+    switch(parseInt($package_id.val())) {
+      case 1:
+        ga('send', {
+          hitType: 'event',
+          eventCategory: 'paypal_adomany',
+          eventAction: 'click',
+          eventLabel: '1000_ft'
+        });
+        break;
+      case 2:
+        ga('send', {
+          hitType: 'event',
+          eventCategory: 'paypal_adomany',
+          eventAction: 'click',
+          eventLabel: '5000_ft'
+        });
+        break;
+      case 3:
+        ga('send', {
+          hitType: 'event',
+          eventCategory: 'paypal_adomany',
+          eventAction: 'click',
+          eventLabel: '10000_ft'
+        });
+      case 4:
+        ga('send', {
+          hitType: 'event',
+          eventCategory: 'paypal_adomany',
+          eventAction: 'click',
+          eventLabel: 'egyedi_adomany'
+        });
+        break;
+    }
+  }
+
 	function init_donation_popup() {
 		$('.payment-packages .package-selector').click(function (e) {
 			e.preventDefault();
@@ -86,6 +122,7 @@
 			if(!validateNlForm()) {
 				e.preventDefault();
 			}
+      donation_ga_events($(this).find('.cnc-package-id'));
 		});
 
 		$('.donation-popup form.indie').submit(function(e) {
