@@ -358,7 +358,6 @@ class Component {
 		if (!isset($_POST['donation-submitted'])) {
 			if (isset($_GET['TransactionId']) && !empty($_GET['TransactionId'])) {
 				$transaction_id = sanitize_text_field($_GET['TransactionId']);
-				$this->initConfig();
 				if($this->checkPaymentResult($transaction_id)) {
 					// Successful transaction
 					$this->updateTransactionStatus($transaction_id, 'successful');
@@ -381,7 +380,6 @@ class Component {
 			if (isset($_GET['TransactionId']) && !empty($_GET['TransactionId'])) {
 				$view = new View();
 				$transaction_id = sanitize_text_field($_GET['TransactionId']);
-				$this->initConfig();
 				if($this->checkPaymentResult($transaction_id)) {
 					// Successful transaction
 
@@ -435,6 +433,7 @@ class Component {
 	 */
 	private function checkPaymentResult($transaction_id)
 	{
+		$this->initConfig();
 		$resultResponse = \BigFish\PaymentGateway::result(new \BigFish\PaymentGateway\Request\Result($transaction_id));
 		if ($resultResponse->ResultCode == 'SUCCESSFUL') {
 			return true;
