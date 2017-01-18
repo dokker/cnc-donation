@@ -322,27 +322,37 @@ class Component {
 			$this->contact = [
 				'email' => sanitize_text_field($_POST['supporter-email']),
 				'name' => sanitize_text_field($_POST['supporter-name']),
-				'package' => $package
+				'package' => $package,
 			];
 			switch ($package) {
 				case 1:
 					$amount = 1000;
+					$this->contact['amount'] = $amount;
+					$this->contact['payment_type'] = 'recurring';
 					$rp_response = $this->startRP($amount);
 					break;
 				case 2:
 					$amount = 5000;
+					$this->contact['amount'] = $amount;
+					$this->contact['payment_type'] = 'recurring';
 					$rp_response = $this->startRP($amount);
 					break;
 				case 3:
 					$amount = 10000;
+					$this->contact['amount'] = $amount;
+					$this->contact['payment_type'] = 'recurring';
 					$rp_response = $this->startRP($amount);
 					break;
 				case 4:
 					if (!empty($_POST['cnc-recurring-amount'])) {
 						$amount = intval($_POST['cnc-recurring-amount']);
+						$this->contact['amount'] = $amount;
+						$this->contact['payment_type'] = 'recurring';
 						$rp_response = $this->startRP($amount);
 					} else {
 						$amount = intval($_POST['cnc-single-amount']);
+						$this->contact['amount'] = $amount;
+						$this->contact['payment_type'] = 'one-time';
 						$sp_response = $this->startSP($amount, 'CIB');
 					}
 					break;
@@ -389,7 +399,7 @@ class Component {
 					$firstname = implode(" ", $name);
 					if (!empty($contact)) {
 						$crm = new CRM();
-						$crm_result = $crm->checkResult($crm->createContact($firstname, $lastname, $contact->email, ['donation-' . $contact->package]));
+						$crm_result = $crm->checkResult($crm->createContact($firstname, $lastname, $contact->email, ['donation-' . $contact->package, 'amount-' . $contact->amount, $contact->payment_type]));
 					}
 
 					$type = $this->getTransactionType($transaction_id);
