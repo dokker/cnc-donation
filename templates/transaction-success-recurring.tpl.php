@@ -8,29 +8,29 @@ document,'script','https://connect.facebook.net/en_US/fbevents.js');
 fbq('init', '794771100660836'); // Insert your pixel ID here.
 fbq('track', 'PageView');
 </script>
-<noscript><img height=""1"" width=""1"" style=""display:none""
-src=""https://www.facebook.com/tr?id=794771100660836&ev=PageView&noscript=1""
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=794771100660836&ev=PageView&noscript=1"
 /></noscript>
 <!-- DO NOT MODIFY -->
 <!-- End Facebook Pixel Code -->
-<script>fbq('track', '<PAYPAL_ADOMANY>');</script>"
+<script>fbq('track', '<PAYPAL_ADOMANY>');</script>
 
 <!-- Google Code for paypal_adomany Conversion Page -->
-<script type=""text/javascript"">
+<script type="text/javascript">
 /* <![CDATA[ */
 var google_conversion_id = 970893359;
-var google_conversion_language = ""en"";
-var google_conversion_format = ""3"";
-var google_conversion_color = ""ffffff"";
-var google_conversion_label = ""Y9AYCK-w52wQr9D6zgM"";
+var google_conversion_language = "en";
+var google_conversion_format = "3";
+var google_conversion_color = "ffffff";
+var google_conversion_label = "Y9AYCK-w52wQr9D6zgM";
 var google_remarketing_only = false;
 /* ]]> */
 </script>
-<script type=""text/javascript"" src=""//www.googleadservices.com/pagead/conversion.js"">
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
 </script>
 <noscript>
-<div style=""display:inline;"">
-<img height=""1"" width=""1"" style=""border-style:none;"" alt="""" src=""//www.googleadservices.com/pagead/conversion/970893359/?label=Y9AYCK-w52wQr9D6zgM&amp;guid=ON&amp;script=0""/>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/970893359/?label=Y9AYCK-w52wQr9D6zgM&amp;guid=ON&amp;script=0"/>
 </div>
 </noscript>
 
