@@ -1,4 +1,4 @@
-<div class="petition-container col-md-6">
+<div class="nl-signup-container petition-container col-md-6">
 <form action="" method="post" id="" name="petition-form" class="petition-form">
     <div class="mc-field-group form-group">
       <label class="sr-only" for="petitioner-name"><?php _e('Name', 'sage'); ?> </label>
