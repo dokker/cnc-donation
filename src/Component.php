@@ -41,8 +41,8 @@ class Component {
 	 */
 	public function registerScripts()
 	{
-		wp_enqueue_style('cnc-donation-main', $this->plugin_url . '/assets/css/main.css');
-		wp_register_script('cnc-donation-main', $this->plugin_url . '/assets/js/main.js', array('jquery'), '1', true);
+		wp_enqueue_style('cnc-donation-main', $this->plugin_url . 'assets/css/main.css');
+		wp_register_script('cnc-donation-main', $this->plugin_url . 'assets/js/main.js', array('jquery'), '1', true);
 		// Prepare script for use AJAX
 		wp_localize_script( 'cnc-donation-main', 'cnc_donation_obj', array(
 			'ajax_url' => admin_url( 'admin-ajax.php' ),
