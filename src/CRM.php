@@ -88,32 +88,29 @@ class CRM {
 
 	/**
 	 * Create contact in Agile CRM
-	 * @param  string $first_name First name
-	 * @param  string $last_name  Last name
-	 * @param  string $email      Email address
-	 * @param  array $tags        Tags
+	 * @param  array $contact_details	Set of contact details
 	 * @return string            REST API Json result
 	 */
-	public function createContact($first_name, $last_name, $email, $tags)
+	public function createContact($contact_details)
 	{
 		$this->error = false;
 		$this->error_msg = '';
 		$contact_json = [
-			'tags' => $tags,
+			'tags' => $contact_details['tags'],
 			'properties' => [
 				[
 					'name' => 'first_name',
-					'value' => $first_name,
+					'value' => $contact_details['first_name'],
 					'type' => 'SYSTEM',
 				],
 				[
 					'name' => 'last_name',
-					'value' => $last_name,
+					'value' => $contact_details['last_name'],
 					'type' => 'SYSTEM',
 				],
 				[
 					'name' => 'email',
-					'value' => $email,
+					'value' => $contact_details['email'],
 					'type' => 'SYSTEM',
 				],
 				[
@@ -129,11 +126,65 @@ class CRM {
 	}
 
 	/**
+	 * Fetch contact data from CRM
+	 * @param  string $email Email address
+	 * @return object        REST API Json result
+	 */
+	private function fetchContact($email)
+	{
+		$this->error = false;
+		$this->error_msg = '';
+		$result = $this->curl_wrap("contacts/search/email/{$email}", null, "GET", "application/json");
+		return $result;
+	}
+
+	/**
+	 * Update contact tags in Agile CRM
+	 * @param  array $contact_details	Set of contact details
+	 * @param object $saved_contact Json object of saved contact
+	 * @return string            REST API Json result
+	 */
+	private function updateContactTags($contact_details, $saved_contact)
+	{
+		$contact_json = [
+			'id' => $saved_contact->id,
+			'tags' => $contact_details['tags'],
+		];
+		$contact_json = json_encode($contact_json);
+		$result = $this->curl_wrap('contacts/edit/tags', $contact_json, 'PUT', 'application/json');
+		return $result;
+	}
+
+	/**
+	 * Insert contact in Agile CRM
+	 * @param  string $first_name First name
+	 * @param  string $last_name  Last name
+	 * @param  string $email      Email address
+	 * @param  array $tags        Tags
+	 * @return string            REST API Json result
+	 */
+	public function insertContact($first_name, $last_name, $email, $tags)
+	{
+		$contact_details = [
+			'first_name' => $first_name,
+			'last_name' => $last_name,
+			'email' => $email,
+			'tags' => $tags,
+		];
+		$fetch_result = $this->fetchContact($email);
+		if($this->checkResult($fetch_result)) {
+			$crm_result = $this->checkResult($this->updateContactTags($contact_details, json_decode($fetch_result)));
+		} else {
+			$crm_result = $this->checkResult($this->createContact($contact_details));
+		}
+	}
+
+	/**
 	 * Check string is Json data
 	 * @param  string  $string String to check
 	 * @return boolean         Check result
 	 */
-	function isJson($string) {
+	private function isJson($string) {
 		json_decode($string);
 		return (json_last_error() == JSON_ERROR_NONE);
 	}

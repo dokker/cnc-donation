@@ -400,7 +400,13 @@ class Component {
 					$firstname = implode(" ", $name);
 					if (!empty($contact)) {
 						$crm = new CRM();
-						$crm_result = $crm->checkResult($crm->createContact($firstname, $lastname, $contact->email, ['donation-' . $contact->package, 'amount-' . $contact->amount, $contact->payment_type, 'lang-' . $contact->language]));
+						$tags = [
+							'donation-' . $contact->package,
+							'amount-' . $contact->amount,
+							$contact->payment_type,
+							'lang-' . $contact->language,
+						];
+						$crm->insertContact($firstname, $lastname, $contact->email, $tags);
 					}
 
 					$type = $this->getTransactionType($transaction_id);
