@@ -323,6 +323,7 @@ class Component {
 				'email' => sanitize_text_field($_POST['supporter-email']),
 				'name' => sanitize_text_field($_POST['supporter-name']),
 				'package' => $package,
+				'language'	=> $this->getCurrentLanguage(),
 			];
 			switch ($package) {
 				case 1:
@@ -399,7 +400,7 @@ class Component {
 					$firstname = implode(" ", $name);
 					if (!empty($contact)) {
 						$crm = new CRM();
-						$crm_result = $crm->checkResult($crm->createContact($firstname, $lastname, $contact->email, ['donation-' . $contact->package, 'amount-' . $contact->amount, $contact->payment_type]));
+						$crm_result = $crm->checkResult($crm->createContact($firstname, $lastname, $contact->email, ['donation-' . $contact->package, 'amount-' . $contact->amount, $contact->payment_type, 'lang-' . $contact->language]));
 					}
 
 					$type = $this->getTransactionType($transaction_id);
