@@ -100,10 +100,12 @@
 	resize: vertical;
 }
 
+.petition-container .has-error .help-block,
 .donation-popup .has-error .help-block {
 	display: block;
 }
 
+.petition-container .help-block,
 .donation-popup .help-block {
 	display: none;
 	text-align: center;
@@ -180,4 +182,12 @@
 .custom-control-input:focus~.custom-control-indicator {
     -webkit-box-shadow: 0 0 0 .075em #fff,0 0 0 .2em #0074d9;
     box-shadow: 0 0 0 .075em #fff,0 0 0 .2em #0074d9;
+}
+
+.petition-container .form-group-submit {
+	margin: 0;
+}
+
+.petition-container {
+
 }

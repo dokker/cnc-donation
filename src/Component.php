@@ -594,6 +594,18 @@ class Component {
 		return $html;
 	}
 
+	/**
+	 * Generate Petition form shortcode content
+	 * @return string HTML markup of the shortcode
+	 */
+	public function petitionShortcode()
+	{
+		wp_enqueue_script('cnc-donation-main');
+		$view = new View();
+		$html = $view->render('form-petition');
+		return $html;
+	}
+
 	private function getCurrentLanguage()
 	{
 		if ( function_exists('icl_object_id') ) {
