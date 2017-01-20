@@ -1,3 +1,3 @@
-<h3>Köszönjük, hogy aláírta a petíciót!</h3>
-<p>A korrupció elleni harc közös ügyünk.
-Csatlakozzon hozzánk és ha módjában áll, támogassa adományával munkánkat.</p>
+<h3><?php _e('Thank you for signing our petition.', 'cnc-donation'); ?></h3>
+<p><?php _e('The fight against corruption is our mutual cause.', 'cnc-donation'); ?><br>
+<?php _e('Join us, and support our work with your donation if you can.', 'cnc-donation'); ?></p>

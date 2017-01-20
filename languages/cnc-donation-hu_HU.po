@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: cnc Donation Plugin 1.0\n"
-"POT-Creation-Date: 2016-12-09 13:20+0100\n"
-"PO-Revision-Date: 2016-12-09 13:20+0100\n"
+"POT-Creation-Date: 2017-01-20 15:48+0100\n"
+"PO-Revision-Date: 2017-01-20 15:49+0100\n"
 "Last-Translator: docker <dock3r@gmail.com>\n"
 "Language-Team: colorandcode <denes@colorandcode.hu>\n"
 "Language: hu_HU\n"
@@ -16,31 +16,31 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: src/CRM.php:159
+#: src/CRM.php:210
 msgid "Error: "
 msgstr "Hiba: "
 
-#: src/Component.php:480
+#: src/Component.php:487
 msgid "Once Every 30 Days"
 msgstr "30 naponta egyszer"
 
-#: src/Component.php:530
+#: src/Component.php:537
 msgid "Initiate a new transaction"
 msgstr "Új tranzakció kezdeményezése"
 
-#: src/Component.php:560 templates/sc-payment-packages.tpl.php:5
+#: src/Component.php:567 templates/sc-payment-packages.tpl.php:5
 msgid "Ally of Transparency"
 msgstr "Átláthatóság támogatója"
 
-#: src/Component.php:563 templates/sc-payment-packages.tpl.php:13
+#: src/Component.php:570 templates/sc-payment-packages.tpl.php:13
 msgid "Champion of Integrity"
 msgstr "Becsületesség bajnoka"
 
-#: src/Component.php:566 templates/sc-payment-packages.tpl.php:21
+#: src/Component.php:573 templates/sc-payment-packages.tpl.php:21
 msgid "Anti-Corruption Superhero"
 msgstr "Korrupcióellenes szuperhős"
 
-#: src/Component.php:585 templates/sc-payment-indie.tpl.php:5
+#: src/Component.php:592 templates/sc-payment-indie.tpl.php:5
 msgid "Unique Donation"
 msgstr "Egyedi adományozó"
 
@@ -84,6 +84,49 @@ msgstr "PayPal"
 msgid "Send"
 msgstr "Küldés"
 
+#: templates/form-petition-success.tpl.php:1
+msgid "Thank you for signing our petition."
+msgstr "Köszönjük, hogy aláírta a petíciót!"
+
+#: templates/form-petition-success.tpl.php:2
+msgid "The fight against corruption is our mutual cause."
+msgstr "A korrupció elleni harc közös ügyünk."
+
+#: templates/form-petition-success.tpl.php:3
+msgid "Join us, and support our work with your donation if you can."
+msgstr ""
+"Csatlakozzon hozzánk és ha módjában áll, támogassa adományával munkánkat."
+
+#: templates/form-petition.tpl.php:4 templates/form-petition.tpl.php:5
+#: templates/popup-donation-indie.tpl.php:20
+#: templates/popup-donation-indie.tpl.php:21
+#: templates/popup-donation-package.tpl.php:10
+#: templates/popup-donation-package.tpl.php:11
+msgid "Name"
+msgstr "Név"
+
+#: templates/form-petition.tpl.php:6 templates/popup-donation-indie.tpl.php:22
+#: templates/popup-donation-package.tpl.php:12
+msgid "Missing name"
+msgstr "Hiányzó név"
+
+#: templates/form-petition.tpl.php:9 templates/form-petition.tpl.php:10
+#: templates/popup-donation-indie.tpl.php:25
+#: templates/popup-donation-indie.tpl.php:26
+#: templates/popup-donation-package.tpl.php:15
+#: templates/popup-donation-package.tpl.php:16
+msgid "Email"
+msgstr "E-mail cím"
+
+#: templates/form-petition.tpl.php:11 templates/popup-donation-indie.tpl.php:27
+#: templates/popup-donation-package.tpl.php:17
+msgid "Missing Email"
+msgstr "Hiányzó E-mail cím"
+
+#: templates/form-petition.tpl.php:14
+msgid "I sign it"
+msgstr "Aláírom"
+
 #: templates/popup-donation-indie.tpl.php:10
 #: templates/popup-donation-indie.tpl.php:11
 msgid "One-time Unique Donation (HUF)"
@@ -105,30 +148,6 @@ msgid ""
 msgstr ""
 "Ha 15.000 Ft felett támogatsz minket, egy Transparency International "
 "ajándékcsomaggal lepünk meg."
-
-#: templates/popup-donation-indie.tpl.php:20
-#: templates/popup-donation-indie.tpl.php:21
-#: templates/popup-donation-package.tpl.php:10
-#: templates/popup-donation-package.tpl.php:11
-msgid "Name"
-msgstr "Név"
-
-#: templates/popup-donation-indie.tpl.php:22
-#: templates/popup-donation-package.tpl.php:12
-msgid "Missing name"
-msgstr "Hiányzó név"
-
-#: templates/popup-donation-indie.tpl.php:25
-#: templates/popup-donation-indie.tpl.php:26
-#: templates/popup-donation-package.tpl.php:15
-#: templates/popup-donation-package.tpl.php:16
-msgid "Email"
-msgstr "E-mail cím"
-
-#: templates/popup-donation-indie.tpl.php:27
-#: templates/popup-donation-package.tpl.php:17
-msgid "Missing Email"
-msgstr "Hiányzó E-mail cím"
 
 #: templates/popup-donation-indie.tpl.php:33
 #: templates/popup-donation-package.tpl.php:30
@@ -197,12 +216,12 @@ msgstr ""
 "személyre szóló meghívó mellett, részt vehet exkluzív rendezvényeinken, "
 "valamint a nyomtatott kiadványainkból postázunk önnek egy példányt. "
 
-#: templates/transaction-success-recurring.tpl.php:1
-#: templates/transaction-success-single.tpl.php:1
+#: templates/transaction-success-recurring.tpl.php:38
+#: templates/transaction-success-single.tpl.php:38
 msgid "Successful transaction! Thank you for your donation!"
 msgstr "Sikeres tranzakció! Köszönjük támogatását!"
 
-#: templates/transaction-success-recurring.tpl.php:2
+#: templates/transaction-success-recurring.tpl.php:39
 msgid ""
 "If you wish to modify your monthly regular payments please follow the steps "
 "below:"
@@ -210,28 +229,28 @@ msgstr ""
 "Amennyiben módosítani szeretne a rendszeres havi fizetésén, kövesse a "
 "következő lépéseket:"
 
-#: templates/transaction-success-recurring.tpl.php:3
+#: templates/transaction-success-recurring.tpl.php:40
 msgid "English language guide"
 msgstr "Angol nyelvű útmutató."
 
-#: templates/transaction-success-recurring.tpl.php:5
+#: templates/transaction-success-recurring.tpl.php:42
 msgid "Log in to your PayPal account."
 msgstr "Jelentkezzen be a PayPal fiókjába."
 
-#: templates/transaction-success-recurring.tpl.php:6
+#: templates/transaction-success-recurring.tpl.php:43
 msgid "Click <b>Profile</b> near the top of the page."
 msgstr "Kattintson a „Profile” gombra a lap tetején."
 
-#: templates/transaction-success-recurring.tpl.php:7
+#: templates/transaction-success-recurring.tpl.php:44
 msgid "Click <b>My money</b>"
 msgstr "Kattintson a „My money” gombra."
 
-#: templates/transaction-success-recurring.tpl.php:8
+#: templates/transaction-success-recurring.tpl.php:45
 msgid ""
 "Click <b>Update </b>in the <strong>My preapproved payments </strong>section."
 msgstr "Kattintson az „Update” gombra a „My preapproved payments” menü alatt."
 
-#: templates/transaction-success-recurring.tpl.php:9
+#: templates/transaction-success-recurring.tpl.php:46
 msgid ""
 "Click <b>Cancel</b> or <b>Cancel automatic billing</b> and follow the "
 "instructions."
@@ -239,19 +258,19 @@ msgstr ""
 "Kattintson a „Cancel” vagy „Cancel automatic billing” gombra és kövesse a "
 "további utasításokat."
 
-#: templates/transaction-success-recurring.tpl.php:11
+#: templates/transaction-success-recurring.tpl.php:48
 msgid "In case you don’t have a PayPal account:"
 msgstr "Amennyiben nem rendelkezik paypal fiókkal:"
 
-#: templates/transaction-success-recurring.tpl.php:13
+#: templates/transaction-success-recurring.tpl.php:50
 msgid "Go to the PayPal website."
 msgstr "Keresse fel a PayPal weboldalát."
 
-#: templates/transaction-success-recurring.tpl.php:14
+#: templates/transaction-success-recurring.tpl.php:51
 msgid "Click <b>Contact Us</b> at the bottom of any page."
 msgstr "Kattintson a „Contact us” gombra az oldal alján."
 
-#: templates/transaction-success-recurring.tpl.php:15
+#: templates/transaction-success-recurring.tpl.php:52
 msgid ""
 "Click <b>Call Us</b>, then click <b>Continue</b> for our Customer Service "
 "phone number."
