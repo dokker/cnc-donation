@@ -41,8 +41,8 @@ class Component {
 	 */
 	public function registerScripts()
 	{
-		wp_enqueue_style('cnc-donation-main', $this->plugin_url . '/assets/css/main.css');
-		wp_register_script('cnc-donation-main', $this->plugin_url . '/assets/js/main.js', array('jquery'), '1', true);
+		wp_enqueue_style('cnc-donation-main', $this->plugin_url . 'assets/css/main.css');
+		wp_register_script('cnc-donation-main', $this->plugin_url . 'assets/js/main.js', array('jquery'), '1', true);
 		// Prepare script for use AJAX
 		wp_localize_script( 'cnc-donation-main', 'cnc_donation_obj', array(
 			'ajax_url' => admin_url( 'admin-ajax.php' ),
@@ -591,6 +591,41 @@ class Component {
 		$view->assign('package_id', 4);
 		$view->assign('package_name', __('Unique Donation', 'cnc-donation'));
 		$html .= $view->render('popup-donation-indie');
+		return $html;
+	}
+
+	/**
+	 * Generate Petition form shortcode content
+	 * @return string HTML markup of the shortcode
+	 */
+	public function petitionShortcode()
+	{
+		$view = new View();
+		if (isset($_POST['petition-submitted'])) {
+			$email = sanitize_text_field($_POST['petitioner-email']);
+			$name = sanitize_text_field($_POST['petitioner-name']);
+			if (!empty($email) && !empty($name)) {
+				$this->contact = [
+					'email' => $email,
+					'name' => $name,
+				];
+				// Separate names
+				$name_arr = explode(' ', $name);
+				$lastname = array_pop($name_arr);
+				$firstname = implode(" ", $name_arr);
+				// Create tags
+				$tags = [
+					'petition',
+					'lang-' . $this->getCurrentLanguage(),
+				];
+				$crm = new CRM();
+				$crm->insertContact($firstname, $lastname, $email, $tags);
+				$html = $view->render('form-petition-success');
+			}
+		} else {
+			wp_enqueue_script('cnc-donation-main');
+			$html = $view->render('form-petition');
+		}
 		return $html;
 	}
 
