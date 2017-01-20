@@ -600,9 +600,32 @@ class Component {
 	 */
 	public function petitionShortcode()
 	{
-		wp_enqueue_script('cnc-donation-main');
 		$view = new View();
-		$html = $view->render('form-petition');
+		if (isset($_POST['petition-submitted'])) {
+			$email = sanitize_text_field($_POST['petitioner-email']);
+			$name = sanitize_text_field($_POST['petitioner-name']);
+			if (!empty($email) && !empty($name)) {
+				$this->contact = [
+					'email' => $email,
+					'name' => $name,
+				];
+				// Separate names
+				$name_arr = explode(' ', $name);
+				$lastname = array_pop($name_arr);
+				$firstname = implode(" ", $name_arr);
+				// Create tags
+				$tags = [
+					'petition',
+					'lang-' . $this->getCurrentLanguage(),
+				];
+				$crm = new CRM();
+				$crm->insertContact($firstname, $lastname, $email, $tags);
+				$html = $view->render('form-petition-success');
+			}
+		} else {
+			wp_enqueue_script('cnc-donation-main');
+			$html = $view->render('form-petition');
+		}
 		return $html;
 	}
 
